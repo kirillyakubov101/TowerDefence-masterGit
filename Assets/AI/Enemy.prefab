@@ -162,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3370057148916221514}
   m_LocalRotation: {x: -0.7018013, y: -0, z: -0, w: 0.7123727}
-  m_LocalPosition: {x: 0, y: 0.896, z: 0}
+  m_LocalPosition: {x: 0, y: 2.205, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 222177925350376605}
@@ -420,7 +420,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5013,17 +5013,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 2cb644e973b28e1478a6af0b5c45926d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2cb644e973b28e1478a6af0b5c45926d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2cb644e973b28e1478a6af0b5c45926d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 2cb644e973b28e1478a6af0b5c45926d,
         type: 3}
