@@ -23,7 +23,6 @@ namespace TowerDefence.Towers
 		{
 			animator = GetComponent<Animator>();
 			transform.rotation = rotatationStart;
-
 		}
 
 		// Update is called once per frame
@@ -50,7 +49,6 @@ namespace TowerDefence.Towers
 			{
 				StopShooting();
 			}
-
 		}
 
 		private void OnDrawGizmos()
