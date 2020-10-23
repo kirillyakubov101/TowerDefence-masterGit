@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TowerDefence.AI;
 using UnityEngine;
 
 namespace TowerDefence.Towers
@@ -7,17 +8,19 @@ namespace TowerDefence.Towers
 	public class TeslaTower : MonoBehaviour
 	{
 		[SerializeField] LayerMask mask;
-		[SerializeField] CombatTarget enemy; //remove the serialize
+		[SerializeField] Health enemy; //remove the serialize
 		[SerializeField] float range = 5f;
-		[SerializeField] ParticleSystem lighting;
+		[SerializeField] List<Health> enemiesNearBy = null;
+		[SerializeField] float towerDamage = 50f;
 
-		float delay = 0;
+		//Cache
+		LineRenderer laser;
 
-		// Start is called before the first frame update
-		void Start()
+		private void Awake()
 		{
-
+			laser = GetComponent<LineRenderer>();
 		}
+
 
 		// Update is called once per frame
 		void Update()
@@ -28,36 +31,45 @@ namespace TowerDefence.Towers
 
 		private void CastSphere()
 		{
-			if (enemy != null) { return; }
 			var hits = Physics.OverlapSphere(transform.position, range, mask);
-
 			foreach (var hit in hits)
 			{
-				if (hit.gameObject.GetComponent<CombatTarget>())
+				if (hit.gameObject.GetComponent<Health>() && !enemiesNearBy.Contains(hit.gameObject.GetComponent<Health>()))
+				{
 					AssignNewEnemy(hit);
-				return;
+				}
 			}
-
-			enemy = null;
+			laser.positionCount = enemiesNearBy.Count + 1; //dynaimecly setting size of linerenderer
 		}
 
 		private void AssignNewEnemy(Collider hit)
 		{
-			enemy = hit.gameObject.GetComponent<CombatTarget>();
+			enemy = hit.gameObject.GetComponent<Health>();
+			enemiesNearBy.Add(enemy);
 		}
 
 		private void Shoot()
 		{
 			if (enemy == null) { StopShooting();  return; }
 			float distance = Vector3.Distance(transform.position, enemy.transform.position);
-			if (distance <= range)
+			if (distance <= range && enemiesNearBy.Count > 0)
 			{
-				ActivateLightning();
+				GenerateNoise();
+				GenerateLightning();
 			}
 			else
 			{
 				enemy = null;
+				enemiesNearBy.Clear();
+				laser.enabled = false;
 			}
+		}
+
+		private void GenerateNoise()
+		{
+			float randomOffsetX = Random.Range(-0.5f, 0.5f); //the lightning effect noise happens here!
+			float randomOffsetY = Random.Range(-0.1f, 0.1f);
+			laser.material.mainTextureOffset = new Vector2(randomOffsetX, randomOffsetY);
 		}
 
 		private void StopShooting()
@@ -65,25 +77,29 @@ namespace TowerDefence.Towers
 			enemy = null;
 		}
 
-		void ActivateLightning()
-		{
-			lighting.transform.LookAt(enemy.transform.position); //aim towards the enemy
-			if (delay >= 2f)
-			{
-				lighting.Play();
-				delay = 0;
-			}
-			delay += Time.deltaTime;
-		}
-
-
 		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawWireSphere(transform.position, range);
 		}
 
+		void GenerateLightning()
+		{
+			
+			laser.enabled = true;
+			Vector3[] arrayOfEnemiesPositions = new Vector3[enemiesNearBy.Count];
 
+			laser.SetPosition(0, transform.position);
+			for (int i = 0; i < enemiesNearBy.Count; i++)
+			{
+				if(enemiesNearBy[i] == null) { continue; }
+				arrayOfEnemiesPositions[i] = enemiesNearBy[i].transform.position;
+				Vector3 newPosOffset = new Vector3 (arrayOfEnemiesPositions[i].x, arrayOfEnemiesPositions[i].y + 2f, arrayOfEnemiesPositions[i].z);
+				laser.SetPosition(i + 1, newPosOffset);
+				enemiesNearBy[i].takeDamage(towerDamage);
+			}
+			arrayOfEnemiesPositions = null;
+		}
 	}
 
 

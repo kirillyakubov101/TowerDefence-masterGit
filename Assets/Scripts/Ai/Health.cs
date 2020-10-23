@@ -6,40 +6,24 @@ namespace TowerDefence.AI
 	public class Health : MonoBehaviour
 	{
 		[SerializeField] float health = 100f;
-		[SerializeField] int goldAmount = 50;
-		[SerializeField] ParticleSystem deathCoins = null;
 
-		Animator animator;
-		LevelController levelController;
-		AiController aiController;
-
+		Death death;
 
 		private void Awake()
 		{
-			levelController = FindObjectOfType<LevelController>();
-			aiController = GetComponent<AiController>();
-			animator = GetComponent<Animator>();
+			death = GetComponent<Death>();
 		}
 
 		public void takeDamage(float damage)
 		{
 			if (damage >= health)
 			{
-				Die();
+				health = 0;
+				death.Die();
+				Destroy(this);
 			}
 
 			health -= damage;
-
-		}
-
-		private void Die()
-		{
-			animator.SetTrigger("die");
-			health = 0;
-			aiController.StopAgent();
-			deathCoins.Play();
-			levelController.GainGold(goldAmount);
-			Destroy(gameObject, 1f);
 
 		}
 	}

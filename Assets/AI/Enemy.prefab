@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8950643003142105679}
   - component: {fileID: 4163449642117739274}
   - component: {fileID: 3773946216622760870}
+  - component: {fileID: 3903798058693784095}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -99,8 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
-  goldAmount: 50
-  deathCoins: {fileID: 7111823096379410407}
 --- !u!54 &4163449642117739274
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,6 +135,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3903798058693784095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222177925350376601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910b8edafac82f44cb06b28dbb1cbbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathCoins: {fileID: 7111823096379410407}
+  goldAmount: 50
 --- !u!1 &3370057148916221514
 GameObject:
   m_ObjectHideFlags: 0
