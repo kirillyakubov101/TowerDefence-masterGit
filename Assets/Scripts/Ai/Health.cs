@@ -26,5 +26,10 @@ namespace TowerDefence.AI
 			health -= damage;
 
 		}
+
+		public float GetHealth()
+		{
+			return health;
+		}
 	}
 }

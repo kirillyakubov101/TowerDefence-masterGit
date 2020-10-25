@@ -54,14 +54,14 @@ namespace TowerDefence.Towers
 			float distance = Vector3.Distance(transform.position, enemy.transform.position);
 			if (distance <= range && enemiesNearBy.Count > 0)
 			{
-				GenerateNoise();
 				GenerateLightning();
+				GenerateNoise();
 			}
 			else
 			{
-				enemy = null;
-				enemiesNearBy.Clear();
-				laser.enabled = false;
+				StopShooting();
+
+
 			}
 		}
 
@@ -74,7 +74,9 @@ namespace TowerDefence.Towers
 
 		private void StopShooting()
 		{
+			laser.enabled = false;
 			enemy = null;
+			enemiesNearBy.Clear();
 		}
 
 		private void OnDrawGizmos()
@@ -92,7 +94,7 @@ namespace TowerDefence.Towers
 			laser.SetPosition(0, transform.position);
 			for (int i = 0; i < enemiesNearBy.Count; i++)
 			{
-				if(enemiesNearBy[i] == null) { continue; }
+				if (enemiesNearBy[i] == null) { continue; } //avoid dead enemy
 				arrayOfEnemiesPositions[i] = enemiesNearBy[i].transform.position;
 				Vector3 newPosOffset = new Vector3 (arrayOfEnemiesPositions[i].x, arrayOfEnemiesPositions[i].y + 2f, arrayOfEnemiesPositions[i].z);
 				laser.SetPosition(i + 1, newPosOffset);
@@ -100,6 +102,7 @@ namespace TowerDefence.Towers
 			}
 			arrayOfEnemiesPositions = null;
 		}
+		
 	}
 
 
