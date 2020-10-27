@@ -12,6 +12,7 @@ namespace TowerDefence.Towers
 		[SerializeField] float range = 5f;
 		[SerializeField] List<Health> enemiesNearBy = null;
 		[SerializeField] float towerDamage = 50f;
+		[SerializeField] Transform shootingPoint = null;
 
 		//Cache
 		LineRenderer laser;
@@ -91,7 +92,7 @@ namespace TowerDefence.Towers
 			laser.enabled = true;
 			Vector3[] arrayOfEnemiesPositions = new Vector3[enemiesNearBy.Count];
 
-			laser.SetPosition(0, transform.position);
+			laser.SetPosition(0, shootingPoint.position);
 			for (int i = 0; i < enemiesNearBy.Count; i++)
 			{
 				if (enemiesNearBy[i] == null) { continue; } //avoid dead enemy

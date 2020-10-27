@@ -7,9 +7,12 @@ namespace TowerDefence.Towers
 	[SelectionBase]
 	public class EmpySlot : MonoBehaviour
 	{
-		[Header("Tower")]
-		[SerializeField] Tower tower;
-		[SerializeField] int towerPrice = 100;
+		[Header("Archer")]
+		[SerializeField] Tower archerTower;
+		[SerializeField] int ArcherTowerPrice = 100;
+		[Header("Tesla")]
+		[SerializeField] TeslaTower teslaTower;
+		[SerializeField] int TeslaTowerPrice = 200;
 		[Header("UI")]
 		[SerializeField] BuildUi buildUI;
 		[SerializeField] Animator animator;
@@ -53,10 +56,20 @@ namespace TowerDefence.Towers
 		public void BuildArcherTower()
 		{
 
-			if (levelController.GetGoldAmount() >= towerPrice)
+			if (levelController.GetGoldAmount() >= ArcherTowerPrice)
 			{
-				levelController.PayForTower(towerPrice);
-				Instantiate(tower, newTowerPos, transform.rotation);
+				levelController.PayForTower(ArcherTowerPrice);
+				Instantiate(archerTower, newTowerPos, transform.rotation);
+				Destroy(transform.parent.gameObject);
+			}
+		}
+
+		public void BuildTeslaTower()
+		{
+			if (levelController.GetGoldAmount() >= TeslaTowerPrice)
+			{
+				levelController.PayForTower(TeslaTowerPrice);
+				Instantiate(teslaTower, newTowerPos, transform.rotation);
 				Destroy(transform.parent.gameObject);
 			}
 		}

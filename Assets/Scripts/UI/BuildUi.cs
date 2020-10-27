@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 namespace TowerDefence.UI
 {
+	//FIX THIS SCRIPT. NEEDS TO SHOW THE UI AND DISABLE THE REST
 	public class BuildUi : MonoBehaviour
 	{
-		[SerializeField] Image buildImage;
+		[SerializeField] GameObject buildingTowersContainer;
 		[SerializeField] GameObject ghostTower;
 		[SerializeField] GameObject flag;
 
 		private void Awake()
 		{
-			buildImage.enabled = false;
+			buildingTowersContainer.SetActive(false);
 			ghostTower.SetActive(false);
 		}
 
@@ -25,7 +26,7 @@ namespace TowerDefence.UI
 			{
 				if (this != uiElement)
 				{
-					uiElement.GetBuildUiImage().enabled = false;
+					uiElement.buildingTowersContainer.SetActive(false);
 					uiElement.ghostTower.SetActive(false);
 					uiElement.flag.SetActive(true);
 
@@ -33,16 +34,11 @@ namespace TowerDefence.UI
 				}
 				else
 				{
-					uiElement.GetBuildUiImage().enabled = true;
+					uiElement.buildingTowersContainer.SetActive(true);
 					uiElement.ghostTower.SetActive(true);
 					uiElement.flag.SetActive(false);
 				}
 			}
-		}
-
-		private Image GetBuildUiImage()
-		{
-			return buildImage;
 		}
 
 		public static void DisableAll()
@@ -50,7 +46,7 @@ namespace TowerDefence.UI
 			var allBuildUi = FindObjectsOfType<BuildUi>();
 			foreach (BuildUi uiElement in allBuildUi)
 			{
-				uiElement.GetBuildUiImage().enabled = false;
+				uiElement.buildingTowersContainer.SetActive(false);
 				uiElement.ghostTower.SetActive(false);
 				uiElement.flag.SetActive(true);
 			}
