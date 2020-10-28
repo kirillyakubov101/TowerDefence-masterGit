@@ -60,7 +60,7 @@ namespace TowerDefence.Towers
 			{
 				levelController.PayForTower(ArcherTowerPrice);
 				Instantiate(archerTower, newTowerPos, transform.rotation);
-				Destroy(transform.parent.gameObject);
+				SelfDestroyPaltform();
 			}
 		}
 
@@ -70,11 +70,15 @@ namespace TowerDefence.Towers
 			{
 				levelController.PayForTower(TeslaTowerPrice);
 				Instantiate(teslaTower, newTowerPos, transform.rotation);
-				Destroy(transform.parent.gameObject);
+				SelfDestroyPaltform();
 			}
 		}
 
-
+		private void SelfDestroyPaltform()
+		{
+			Destroy(transform.parent.gameObject);
+			
+		}
 	}
 }
 

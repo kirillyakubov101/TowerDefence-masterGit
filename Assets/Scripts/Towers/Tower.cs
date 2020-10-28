@@ -9,6 +9,7 @@ namespace TowerDefence.Towers
 
 		bool isTowerShowed = false;
 
+		
 
 		private void Update()
 		{

@@ -88,7 +88,7 @@ namespace TowerDefence.Towers
 		private void StopShooting()
 		{
 			animator.SetBool("shoot", false);
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * .5f);
+			//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * .5f); //maybe remove this, it rotates the archer back
 			enemy = null;
 
 		}
