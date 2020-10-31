@@ -9,13 +9,11 @@ namespace TowerDefence.UI
 	public class BuildUi : MonoBehaviour
 	{
 		[SerializeField] GameObject buildingTowersContainer;
-		[SerializeField] GameObject ghostTower;
 		[SerializeField] GameObject flag;
 
 		private void Awake()
 		{
 			buildingTowersContainer.SetActive(false);
-			ghostTower.SetActive(false);
 		}
 
 
@@ -27,7 +25,6 @@ namespace TowerDefence.UI
 				if (this != uiElement)
 				{
 					uiElement.buildingTowersContainer.SetActive(false);
-					uiElement.ghostTower.SetActive(false);
 					uiElement.flag.SetActive(true);
 
 
@@ -35,7 +32,6 @@ namespace TowerDefence.UI
 				else
 				{
 					uiElement.buildingTowersContainer.SetActive(true);
-					uiElement.ghostTower.SetActive(true);
 					uiElement.flag.SetActive(false);
 				}
 			}
@@ -47,7 +43,6 @@ namespace TowerDefence.UI
 			foreach (BuildUi uiElement in allBuildUi)
 			{
 				uiElement.buildingTowersContainer.SetActive(false);
-				uiElement.ghostTower.SetActive(false);
 				uiElement.flag.SetActive(true);
 			}
 		}

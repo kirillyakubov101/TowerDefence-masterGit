@@ -9,9 +9,11 @@ namespace TowerDefence.Towers
 	{
 		[Header("Archer")]
 		[SerializeField] Tower archerTower;
+		[SerializeField] GameObject ghostArcherTower = null;
 		[SerializeField] int ArcherTowerPrice = 100;
 		[Header("Tesla")]
 		[SerializeField] TeslaTower teslaTower;
+		[SerializeField] GameObject ghostTeslaTower = null;
 		[SerializeField] int TeslaTowerPrice = 200;
 		[Header("UI")]
 		[SerializeField] BuildUi buildUI;
@@ -37,7 +39,7 @@ namespace TowerDefence.Towers
 
 		private void OnMouseOver()
 		{
-			flagMat.material.SetColor("_EmissionColor", flagColor * 0.4f);
+			flagMat.material.SetColor("_EmissionColor", flagColor * 0.1f);
 		}
 
 		private void OnMouseExit()
@@ -73,6 +75,30 @@ namespace TowerDefence.Towers
 				SelfDestroyPaltform();
 			}
 		}
+		//MAYBE PUT IT ON A DIFFERENT SCRIPT
+		//on mouse Hover
+		public void ShowArcherTowerPreview()
+		{
+			ghostArcherTower.SetActive(true);
+		}
+
+		//on mouse Hover
+		public void ShowTeslaTowerPreview()
+		{
+			ghostTeslaTower.SetActive(true);
+		}
+
+		//on hover OVER
+		public void HideArcherTowerPreview()
+		{
+			ghostArcherTower.SetActive(false);
+		}
+		//on hover OVER
+		public void HideTeslaTowerPreview()
+		{
+			ghostTeslaTower.SetActive(false);
+		}
+
 
 		private void SelfDestroyPaltform()
 		{

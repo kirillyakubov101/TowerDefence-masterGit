@@ -7,9 +7,15 @@ namespace TowerDefence.Towers
 		[SerializeField] float baseSpawnLevel = -0.2f;
 		[SerializeField] float spawnSpeed = 2f;
 
+		//need to remove this or something
+		TeslaTower tesla;
+
 		bool isTowerShowed = false;
 
-		
+		private void Start()
+		{
+			tesla = GetComponent<TeslaTower>();
+		}
 
 		private void Update()
 		{
@@ -26,6 +32,12 @@ namespace TowerDefence.Towers
 			else
 			{
 				isTowerShowed = true;
+				if(tesla!=null)
+				{
+					tesla.enabled = true;
+				}
+					
+		
 			}
 		}
 	}
