@@ -75,29 +75,6 @@ namespace TowerDefence.Towers
 				SelfDestroyPaltform();
 			}
 		}
-		//MAYBE PUT IT ON A DIFFERENT SCRIPT
-		//on mouse Hover
-		public void ShowArcherTowerPreview()
-		{
-			ghostArcherTower.SetActive(true);
-		}
-
-		//on mouse Hover
-		public void ShowTeslaTowerPreview()
-		{
-			ghostTeslaTower.SetActive(true);
-		}
-
-		//on hover OVER
-		public void HideArcherTowerPreview()
-		{
-			ghostArcherTower.SetActive(false);
-		}
-		//on hover OVER
-		public void HideTeslaTowerPreview()
-		{
-			ghostTeslaTower.SetActive(false);
-		}
 
 
 		private void SelfDestroyPaltform()

@@ -19,6 +19,7 @@ namespace TowerDefence.AI
 		// Update is called once per frame
 		void Update()
 		{
+			if(enemySpawner == null) { return; }
 			meshAgent.destination = enemySpawner.GetTarget().position;
 
 		}

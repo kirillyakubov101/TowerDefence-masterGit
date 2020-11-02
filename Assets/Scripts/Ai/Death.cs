@@ -26,7 +26,11 @@ namespace TowerDefence.AI
 			animator.SetTrigger("die");
 			aiController.StopAgent();
 			deathCoins.Play();
-			levelController.GainGold(goldAmount);
+			if (levelController) //it is avoid null in the sandBox, the IF can be removed later
+			{
+				levelController.GainGold(goldAmount);
+			}
+			
 			Destroy(gameObject, 1f);
 
 		}

@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4636c5c8e92d67d44ac266d621eade7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 125
 --- !u!54 &4163449642117739274
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathCoins: {fileID: 7111823096379410407}
-  goldAmount: 50
+  goldAmount: 15
 --- !u!1 &3370057148916221514
 GameObject:
   m_ObjectHideFlags: 0

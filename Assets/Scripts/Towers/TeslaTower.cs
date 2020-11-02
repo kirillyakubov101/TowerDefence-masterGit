@@ -14,6 +14,7 @@ namespace TowerDefence.Towers
 		[SerializeField] float towerDamage = 50f;
 		[SerializeField] Transform shootingPoint = null;
 
+
 		//Cache
 		LineRenderer laser;
 
