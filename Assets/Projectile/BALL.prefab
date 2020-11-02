@@ -123,9 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e201f4d61776049aa28b51b0c3c93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  h: 10
+  h: 5
   target: {fileID: 0}
-  explosiveForce: {x: 0, y: 5, z: 0}
   damage: 50
   range: 5
   mask:
