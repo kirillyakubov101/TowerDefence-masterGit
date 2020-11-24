@@ -116,7 +116,7 @@ MonoBehaviour:
     m_Bits: 256
   enemy: {fileID: 0}
   shootPoint: {fileID: 438802116567624714}
-  delayMax: 5
+  delayMax: 2
 --- !u!1 &438802116254226657
 GameObject:
   m_ObjectHideFlags: 0
