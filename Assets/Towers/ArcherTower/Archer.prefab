@@ -2543,7 +2543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e05176f8fb1d747adb4e8e4a0f291a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
+  range: 12
   bowPos: {fileID: 1602647600303760413}
   arrow: {fileID: 7399530314509681084, guid: 9d944b2683b54a442a8d4fec2686789d, type: 3}
   damage: 10

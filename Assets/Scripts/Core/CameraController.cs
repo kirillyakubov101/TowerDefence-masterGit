@@ -10,15 +10,15 @@ namespace TowerDefence.Core
 		[SerializeField] float moveSpeed;
 		[SerializeField] float zoomSpeed;
 
-		Camera cam;
+		Camera mainCamera;
 
 		private void Awake()
 		{
-			cam = Camera.main;
+			mainCamera = Camera.main;
 		}
 
 		// Update is called once per frame
-		void Update()
+		void LateUpdate()
 		{
 			Move();
 			Zoom();
@@ -39,7 +39,7 @@ namespace TowerDefence.Core
 		{
 			float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-			float dist = cam.transform.position.y - transform.position.y;
+			float dist = mainCamera.transform.position.y - transform.position.y;
 
 
 			if (dist < minZoomDis && scrollInput > 0f)
@@ -51,8 +51,10 @@ namespace TowerDefence.Core
 				return;
 			}
 
-			cam.transform.position += cam.transform.forward * scrollInput * zoomSpeed;
+			mainCamera.transform.position += mainCamera.transform.forward * scrollInput * zoomSpeed;
 		}
+
+		
 
 
 

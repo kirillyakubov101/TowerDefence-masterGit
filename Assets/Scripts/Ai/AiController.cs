@@ -9,18 +9,20 @@ namespace TowerDefence.AI
 
 		NavMeshAgent meshAgent;
 		EnemySpawner enemySpawner;
+		Transform goalTransform;
 
 		private void Awake()
 		{
 			meshAgent = GetComponent<NavMeshAgent>();
 			enemySpawner = FindObjectOfType<EnemySpawner>();
+			goalTransform = enemySpawner.GetTarget();
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
 			if(enemySpawner == null) { return; }
-			meshAgent.destination = enemySpawner.GetTarget().position;
+			meshAgent.destination = goalTransform.position;
 
 		}
 
