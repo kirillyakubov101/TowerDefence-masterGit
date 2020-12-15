@@ -4,21 +4,22 @@ namespace TowerDefence.Core
 {
 	public class CameraController : MonoBehaviour
 	{
-		[SerializeField] float clampRadius = 12f;
+		//[SerializeField] float clampRadius = 12f;
 		[SerializeField] float minZoomDis;
 		[SerializeField] float maxZoomDis;
 		[SerializeField] float moveSpeed;
 		[SerializeField] float zoomSpeed;
+		//Borders
+		[SerializeField] Transform screenTopYBorder = null;
+		[SerializeField] Transform screenBotYBorder = null;
+		[SerializeField] Transform screenLeftXBorder = null;
+		[SerializeField] Transform screenRightXBorder = null;
 
-		Camera mainCamera;
 
-		private void Awake()
-		{
-			mainCamera = Camera.main;
-		}
+
 
 		// Update is called once per frame
-		void LateUpdate()
+		void Update()
 		{
 			Move();
 			Zoom();
@@ -29,32 +30,54 @@ namespace TowerDefence.Core
 			float xInput = Input.GetAxis("Horizontal");
 			float zInput = Input.GetAxis("Vertical");
 
+			
+
+			if (screenLeftXBorder.position.z >= transform.position.z && xInput < 0)
+			{
+				xInput = 0f;
+			}
+
+			else if (screenRightXBorder.position.z <= transform.position.z && xInput > 0)
+			{
+				xInput = 0f;
+			}
+
+			else if(screenTopYBorder.position.x >= transform.position.x && zInput > 0)
+			{
+				zInput = 0f;
+			}
+
+			else if(screenBotYBorder.position.x <= transform.position.x && zInput < 0)
+			{
+				zInput = 0f;
+			}
+
+
 			Vector3 dir = Vector3.left * zInput + Vector3.forward * xInput;
 
-			transform.position = Vector3.ClampMagnitude(transform.position += dir * moveSpeed * Time.deltaTime, clampRadius);
-
+			//transform.position = Vector3.ClampMagnitude(transform.position += dir * moveSpeed * Time.deltaTime, clampRadius);
+			transform.position += dir * moveSpeed * Time.deltaTime;
 		}
 
 		private void Zoom()
 		{
+			
 			float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-			float dist = mainCamera.transform.position.y - transform.position.y;
 
+			float dist = transform.position.y;
 
-			if (dist < minZoomDis && scrollInput > 0f)
+			if (dist > minZoomDis && scrollInput < 0f)
 			{
 				return;
 			}
-			else if (dist > maxZoomDis && scrollInput < 0f)
+			else if (dist < maxZoomDis && scrollInput > 0f)
 			{
 				return;
 			}
 
-			mainCamera.transform.position += mainCamera.transform.forward * scrollInput * zoomSpeed;
+			transform.position += transform.up * (-scrollInput) * zoomSpeed;
 		}
-
-		
 
 
 
