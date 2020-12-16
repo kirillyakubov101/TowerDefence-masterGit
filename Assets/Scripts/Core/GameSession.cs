@@ -8,6 +8,7 @@ namespace TowerDefence.Core
 	{
 		private void Update()
 		{
+			//IF the ground is being clicked
 			if (Input.GetMouseButtonUp(0))
 			{
 				RaycastHit hit;

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class VillagersController : MonoBehaviour
 {
 	[SerializeField] Transform destination = null;
+	[SerializeField] GameObject villCamera = null;
 	NavMeshAgent agent;
 
     // Start is called before the first frame update
@@ -25,7 +26,12 @@ public class VillagersController : MonoBehaviour
 
 			if (agent.remainingDistance <= 2f)
 			{
-				Destroy(gameObject);
+				if (villCamera != null)
+				{
+					Destroy(villCamera);
+				}
+			
+				Destroy(gameObject,0.1f);
 			}
 		}
 		

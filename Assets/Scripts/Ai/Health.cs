@@ -1,5 +1,4 @@
-﻿using TowerDefence.Core;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TowerDefence.AI
 {

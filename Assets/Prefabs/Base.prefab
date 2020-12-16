@@ -1272,7 +1272,7 @@ RectTransform:
   m_GameObject: {fileID: 6906243950041626910}
   m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
   m_LocalPosition: {x: 0, y: 0, z: -4.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 5498402501801954992}
   m_Father: {fileID: 4221918543608494239}
@@ -1586,10 +1586,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   archerTower: {fileID: 5134112917383037085, guid: 489bee183f46d954ab0af8937f43766c,
     type: 3}
-  ghostArcherTower: {fileID: 0}
   ArcherTowerPrice: 100
   teslaTower: {fileID: 1703608876, guid: 6d2a34d6b6df26844b089d5d19b14cfe, type: 3}
-  ghostTeslaTower: {fileID: 0}
   TeslaTowerPrice: 200
   buildUI: {fileID: 3278179905441571064}
   animator: {fileID: 4318680828297115162}
@@ -1604,7 +1602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5373490985996188802}
   m_Layer: 9
-  m_Name: Road Sighn_lp
+  m_Name: Road Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1701,12 +1699,17 @@ PrefabInstance:
     - target: {fileID: 3133579862243992971, guid: ab77a295a33b69b46a6d9052d64f5dce,
         type: 3}
       propertyPath: m_Name
-      value: Archer Tower
+      value: Archer Tower Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 3133579862243992971, guid: ab77a295a33b69b46a6d9052d64f5dce,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133579862243992971, guid: ab77a295a33b69b46a6d9052d64f5dce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3944150750523966860, guid: ab77a295a33b69b46a6d9052d64f5dce,
         type: 3}

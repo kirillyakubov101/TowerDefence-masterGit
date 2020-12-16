@@ -9,11 +9,11 @@ namespace TowerDefence.Towers
 	{
 		[Header("Archer")]
 		[SerializeField] Tower archerTower;
-		[SerializeField] GameObject ghostArcherTower = null;
+		//[SerializeField] GameObject ghostArcherTower = null;
 		[SerializeField] int ArcherTowerPrice = 100;
 		[Header("Tesla")]
 		[SerializeField] TeslaTower teslaTower;
-		[SerializeField] GameObject ghostTeslaTower = null;
+		//[SerializeField] GameObject ghostTeslaTower = null;
 		[SerializeField] int TeslaTowerPrice = 200;
 		[Header("UI")]
 		[SerializeField] BuildUi buildUI;
@@ -51,6 +51,7 @@ namespace TowerDefence.Towers
 		{
 			buildUI.ActivateOnlyOneUiElement();
 			animator.SetTrigger("appear");
+			
 		}
 
 		//on mouse leave/click somewhere else, need to disable it
@@ -82,6 +83,7 @@ namespace TowerDefence.Towers
 			Destroy(transform.parent.gameObject);
 			
 		}
+
 	}
 }
 
