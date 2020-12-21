@@ -81,11 +81,11 @@ namespace TowerDefence.Towers
 			enemiesNearBy.Clear();
 		}
 
-		private void OnDrawGizmos()
+		/*private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawWireSphere(transform.position, range);
-		}
+		}*/
 
 		void GenerateLightning()
 		{

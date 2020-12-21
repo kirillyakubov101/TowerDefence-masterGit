@@ -30,8 +30,6 @@ namespace TowerDefence.Core
 			float xInput = Input.GetAxis("Horizontal");
 			float zInput = Input.GetAxis("Vertical");
 
-			
-
 			if (screenLeftXBorder.position.z >= transform.position.z && xInput < 0)
 			{
 				xInput = 0f;
@@ -51,7 +49,7 @@ namespace TowerDefence.Core
 			{
 				zInput = 0f;
 			}
-
+			
 
 			Vector3 dir = Vector3.left * zInput + Vector3.forward * xInput;
 

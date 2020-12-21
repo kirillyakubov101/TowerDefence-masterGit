@@ -29,8 +29,19 @@ public class UIManager : MonoBehaviour
 		audioSource.Play();
 		
 		yield return new WaitForSeconds(startButtonClip.length);
-
+		Time.timeScale = 1f;
 		SceneManager.LoadScene(1);
+	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
+	}
+
+	public void LoadMenuScene()
+	{
+		Time.timeScale = 1f;
+		SceneManager.LoadScene(0);
 	}
 
 }
