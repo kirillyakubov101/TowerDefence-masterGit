@@ -17,8 +17,9 @@ namespace TowerDefence.Core
 		//remove or change
 		EnemySpawner enemySpawner;
 
-		bool hasLost = false;
-		bool hasWon = false;
+
+		public static event Action WonGame;
+		public static event Action LostGame;
 
 		private void Awake()
 		{
@@ -40,7 +41,7 @@ namespace TowerDefence.Core
 		{
 			if (FindObjectsOfType<Health>().Length <= 0 && enemySpawner != null)
 			{
-				//Win
+				WonGame?.Invoke();
 			}
 		}
 
@@ -53,8 +54,7 @@ namespace TowerDefence.Core
 		{
 			if (lives <= 0)
 			{
-				hasLost = true;
-				//Lose
+				LostGame?.Invoke();
 			}
 		}
 
