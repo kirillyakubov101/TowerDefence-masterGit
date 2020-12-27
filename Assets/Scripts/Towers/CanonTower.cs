@@ -13,6 +13,7 @@ public class CanonTower : MonoBehaviour
 	[SerializeField] Health enemy; // //remove the serialize
 	[SerializeField] Transform shootPoint;
 	[SerializeField] float delayMax = 5f;
+	[SerializeField] ParticleSystem smokeEffect = null;
 	float shootDelay = 0f;
 	bool canShoot = true;
 
@@ -80,6 +81,8 @@ public class CanonTower : MonoBehaviour
 	{
 		var newProjectile = Instantiate(ball, shootPoint.position, Quaternion.identity);
 		newProjectile.GetComponent<CanonBomb>().AssignTarget(enemy.transform,damage);
+		var smokeInstance = Instantiate(smokeEffect, shootPoint.position, Quaternion.identity);
+		Destroy(smokeInstance, smokeEffect.main.duration);
 		enemy = null;
 	}
 }

@@ -9,6 +9,7 @@ TagManager:
   - ghostArcher
   - ghostTesla
   - FxTemporaire
+  - Tower
   layers:
   - Default
   - TransparentFX

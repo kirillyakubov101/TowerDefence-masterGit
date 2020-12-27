@@ -8,18 +8,19 @@ namespace TowerDefence.Towers
 	public class EmpySlot : MonoBehaviour
 	{
 		[Header("Archer")]
-		[SerializeField] Tower archerTower;
-		//[SerializeField] GameObject ghostArcherTower = null;
+		[SerializeField] Tower archerTower = null;
 		[SerializeField] int ArcherTowerPrice = 100;
 		[Header("Tesla")]
-		[SerializeField] TeslaTower teslaTower;
-		//[SerializeField] GameObject ghostTeslaTower = null;
+		[SerializeField] TeslaTower teslaTower = null;
 		[SerializeField] int TeslaTowerPrice = 200;
+		[Header("Cannon")]
+		[SerializeField] CanonTower canonTower = null;
+		[SerializeField] int CannonTowerPrice = 250;
 		[Header("UI")]
-		[SerializeField] BuildUi buildUI;
-		[SerializeField] Animator animator;
+		[SerializeField] BuildUi buildUI = null;
+		[SerializeField] Animator animator = null;
 		[Header("Flag")]
-		[SerializeField] Renderer flagMat;
+		[SerializeField] Renderer flagMat = null;
 
 		Vector3 newTowerPos;
 		LevelController levelController;
@@ -77,6 +78,15 @@ namespace TowerDefence.Towers
 			}
 		}
 
+		public void BuildCannonTower()
+		{
+			if (levelController.GetGoldAmount() >= CannonTowerPrice)
+			{
+				levelController.PayForTower(CannonTowerPrice);
+				Instantiate(canonTower, newTowerPos, transform.rotation);
+				SelfDestroyPaltform();
+			}
+		}
 
 		private void SelfDestroyPaltform()
 		{

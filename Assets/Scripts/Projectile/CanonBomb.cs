@@ -50,6 +50,8 @@ public class CanonBomb : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		if(other.tag =="Tower") { return; }
+
 		Instantiate(
 			explosiveVFX, new Vector3(transform.position.x,
 			transform.position.y + 2f,
