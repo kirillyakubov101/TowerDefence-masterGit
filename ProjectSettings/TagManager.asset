@@ -8,8 +8,8 @@ TagManager:
   - Enemy
   - ghostArcher
   - ghostTesla
-  - FxTemporaire
   - Tower
+  - ghostCannon
   layers:
   - Default
   - TransparentFX

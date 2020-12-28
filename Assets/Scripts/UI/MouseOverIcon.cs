@@ -1,4 +1,5 @@
 ﻿using TowerDefence.Core;
+using TowerDefence.Resources;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,11 +8,12 @@ namespace TowerDefence.UI
 	public class MouseOverIcon : MonoBehaviour
 	{
 		[SerializeField] GameObject TowerToPreview = null;
-		
+
 		LevelController levelController;
 		Button btn;
 		bool showOnHover;
 		int towerPrice;
+		
 
 
 		private void Awake()
@@ -24,11 +26,12 @@ namespace TowerDefence.UI
 		{
 			towerPrice = DetermineTowerPrice();
 			showOnHover = true;
+			
 		}
 
 		private void Update()
 		{
-			if (levelController.GetGoldAmount() < towerPrice) //magic number..need to fix
+			if (levelController.GetGoldAmount() < towerPrice) 
 			{
 				btn.interactable = false;
 				showOnHover = false;
@@ -51,7 +54,6 @@ namespace TowerDefence.UI
 			TowerToPreview.SetActive(false);
 		}
 
-		//manually input the price of the tower based on its tag
 		private int DetermineTowerPrice()
 		{
 			int price = 0;
@@ -59,13 +61,19 @@ namespace TowerDefence.UI
 			switch (tagName)
 			{
 				case "ghostArcher":
-					price = 100;
+					price = TowerEconomics.archerTowerPrice;
 					break;
 
 				case "ghostTesla":
-					price = 200;
+					price = TowerEconomics.teslaTowerPrice;
 					break;
-				
+
+				case "ghostCannon":
+					print("her");
+					price = TowerEconomics.cannonTowerPrice;
+					break;
+
+
 			}
 			return price;
 		}

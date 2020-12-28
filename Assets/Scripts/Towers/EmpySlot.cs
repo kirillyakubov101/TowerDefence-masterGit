@@ -1,4 +1,5 @@
 ﻿using TowerDefence.Core;
+using TowerDefence.Resources;
 using TowerDefence.UI;
 using UnityEngine;
 
@@ -9,13 +10,10 @@ namespace TowerDefence.Towers
 	{
 		[Header("Archer")]
 		[SerializeField] Tower archerTower = null;
-		[SerializeField] int ArcherTowerPrice = 100;
 		[Header("Tesla")]
 		[SerializeField] TeslaTower teslaTower = null;
-		[SerializeField] int TeslaTowerPrice = 200;
 		[Header("Cannon")]
 		[SerializeField] CanonTower canonTower = null;
-		[SerializeField] int CannonTowerPrice = 250;
 		[Header("UI")]
 		[SerializeField] BuildUi buildUI = null;
 		[SerializeField] Animator animator = null;
@@ -26,6 +24,11 @@ namespace TowerDefence.Towers
 		LevelController levelController;
 		Color flagColor;
 
+		//vars
+		int ArcherTowerPrice;
+		int TeslaTowerPrice;
+		int CannonTowerPrice;
+
 		private void Awake()
 		{
 			levelController = FindObjectOfType<LevelController>();
@@ -34,6 +37,7 @@ namespace TowerDefence.Towers
 
 		private void Start()
 		{
+			InitializeTowerPrices();
 			newTowerPos = new Vector3(transform.position.x, transform.position.y - 5f, transform.position.z);
 			flagColor = new Color(248f, 41f, 31f);
 		}
@@ -92,6 +96,14 @@ namespace TowerDefence.Towers
 		{
 			Destroy(transform.parent.gameObject);
 			
+		}
+
+		private void InitializeTowerPrices()
+		{
+			ArcherTowerPrice = TowerEconomics.archerTowerPrice;
+			TeslaTowerPrice = TowerEconomics.teslaTowerPrice;
+			CannonTowerPrice = TowerEconomics.cannonTowerPrice;
+
 		}
 
 	}

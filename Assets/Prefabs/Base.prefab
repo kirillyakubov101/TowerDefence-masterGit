@@ -886,6 +886,7 @@ GameObject:
   - component: {fileID: 5498402501801954992}
   - component: {fileID: 5635391219138710233}
   - component: {fileID: 8507957190446016064}
+  - component: {fileID: 1742487998057893351}
   m_Layer: 9
   m_Name: TowerContainer
   m_TagString: Untagged
@@ -952,6 +953,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1742487998057893351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4475467637886311161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2caea442c9aa90049aa3dbf60f92db4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  archerTowerPriceValue: {fileID: 9120293183325631247}
+  teslaTowerPriceValue: {fileID: 1927449458988427851}
+  cannonTowerPriceValue: {fileID: 1977779140817567012}
 --- !u!1 &5359661685325199252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,7 +1422,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 150
+  m_Text: 250
 --- !u!1 &8531112215726092576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,12 +1603,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   archerTower: {fileID: 5134112917383037085, guid: 489bee183f46d954ab0af8937f43766c,
     type: 3}
-  ArcherTowerPrice: 100
   teslaTower: {fileID: 1703608876, guid: 6d2a34d6b6df26844b089d5d19b14cfe, type: 3}
-  TeslaTowerPrice: 200
   canonTower: {fileID: 438802115905699605, guid: 6f33c8e69a789e948a75310d023a9dd2,
     type: 3}
-  CannonTowerPrice: 250
   buildUI: {fileID: 3278179905441571064}
   animator: {fileID: 4318680828297115162}
   flagMat: {fileID: 8928352716561329928}
