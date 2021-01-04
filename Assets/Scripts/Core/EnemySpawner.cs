@@ -11,7 +11,7 @@ namespace TowerDefence.Core
 		[SerializeField] Transform target;
 
 		//find it's purpose!!
-		public bool hasStarted = true;
+		//public bool hasStarted = true;
 
 		// Start is called before the first frame update
 		void Start()

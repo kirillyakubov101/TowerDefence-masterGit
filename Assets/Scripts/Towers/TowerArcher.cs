@@ -11,17 +11,19 @@ namespace TowerDefence.Towers
 		[SerializeField] Projectile arrow;  //FIX AND MAKE A NORMAL SCRIPT
 		[SerializeField] float damage = 10f;
 		[SerializeField] LayerMask mask;
-		[SerializeField] Health enemy; // //remove the serialize
-
+  
+		Health enemy; 
 		Animator animator;
 
 		Quaternion rotatationStart;
-
+		private void Awake()
+		{
+			animator = GetComponent<Animator>();
+		}
 
 		// Start is called before the first frame update
 		void Start()
 		{
-			animator = GetComponent<Animator>();
 			transform.rotation = rotatationStart;
 		}
 
@@ -35,7 +37,7 @@ namespace TowerDefence.Towers
 		private void AimAndShootManager()
 		{
 			if (enemy == null) { StopShooting(); return; }
-			float distance = Vector3.Distance(transform.parent.position, enemy.transform.position);
+			float distance = Vector3.Distance(transform.parent.position, enemy.transform.position); //too expensive?
 			if (distance <= range)
 			{
 				var lookPos = enemy.transform.position - transform.position;
@@ -60,7 +62,8 @@ namespace TowerDefence.Towers
 		//Animation Event
 		private void Hit()
 		{
-			var newArrow = Instantiate(arrow, bowPos.position, Quaternion.identity); //Fix this bs
+			if (enemy == null) { StopShooting(); return; }
+			var newArrow = Instantiate(arrow, bowPos.position, Quaternion.identity); 
 			newArrow.AssignTarget(enemy, damage);
 
 		}

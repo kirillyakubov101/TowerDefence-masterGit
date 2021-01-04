@@ -10,6 +10,7 @@ TagManager:
   - ghostTesla
   - Tower
   - ghostCannon
+  - ghostMage
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Terrain
   - particle
   - CameraBorder
-  - 
+  - Projectiles
   - 
   - 
   - 

@@ -26,6 +26,11 @@ namespace TowerDefence.Core
 			enemySpawner = FindObjectOfType<EnemySpawner>();
 		}
 
+		private void Start()
+		{
+			Time.timeScale = 1f;
+		}
+
 		// Update is called once per frame
 		void Update()
 		{

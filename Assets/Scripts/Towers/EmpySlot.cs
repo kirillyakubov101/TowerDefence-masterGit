@@ -9,16 +9,20 @@ namespace TowerDefence.Towers
 	public class EmpySlot : MonoBehaviour
 	{
 		[Header("Archer")]
-		[SerializeField] Tower archerTower = null;
+		[SerializeField] Tower archerTower = null; //check if i can change all to TOWER script
 		[Header("Tesla")]
 		[SerializeField] TeslaTower teslaTower = null;
 		[Header("Cannon")]
 		[SerializeField] CanonTower canonTower = null;
+		[Header("Mage")]
+		[SerializeField] Tower mageTower = null;
 		[Header("UI")]
 		[SerializeField] BuildUi buildUI = null;
 		[SerializeField] Animator animator = null;
 		[Header("Flag")]
 		[SerializeField] Renderer flagMat = null;
+
+		[SerializeField] Transform towerPlace = null;
 
 		Vector3 newTowerPos;
 		LevelController levelController;
@@ -28,6 +32,7 @@ namespace TowerDefence.Towers
 		int ArcherTowerPrice;
 		int TeslaTowerPrice;
 		int CannonTowerPrice;
+		int mageTowerPrice;
 
 		private void Awake()
 		{
@@ -38,7 +43,7 @@ namespace TowerDefence.Towers
 		private void Start()
 		{
 			InitializeTowerPrices();
-			newTowerPos = new Vector3(transform.position.x, transform.position.y - 5f, transform.position.z);
+			newTowerPos = towerPlace.position;
 			flagColor = new Color(248f, 41f, 31f);
 		}
 
@@ -92,6 +97,16 @@ namespace TowerDefence.Towers
 			}
 		}
 
+		public void BuildMageTower()
+		{
+			if (levelController.GetGoldAmount() >= mageTowerPrice)
+			{
+				levelController.PayForTower(mageTowerPrice);
+				Instantiate(mageTower, newTowerPos, transform.rotation);
+				SelfDestroyPaltform();
+			}
+		}
+
 		private void SelfDestroyPaltform()
 		{
 			Destroy(transform.parent.gameObject);
@@ -103,6 +118,7 @@ namespace TowerDefence.Towers
 			ArcherTowerPrice = TowerEconomics.archerTowerPrice;
 			TeslaTowerPrice = TowerEconomics.teslaTowerPrice;
 			CannonTowerPrice = TowerEconomics.cannonTowerPrice;
+			mageTowerPrice = TowerEconomics.mageTowerPrice;
 
 		}
 

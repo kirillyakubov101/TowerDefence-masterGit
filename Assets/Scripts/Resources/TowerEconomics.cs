@@ -7,6 +7,7 @@ namespace TowerDefence.Resources
 		public static int cannonTowerPrice = 200;
 		public static int teslaTowerPrice  = 250;
 		public static int archerTowerPrice = 150;
+		public static int mageTowerPrice = 150;
 
 	}
 

@@ -42,12 +42,15 @@ public class Menu : MonoBehaviour
 	{
 		winLosePanel.SetActive(true);
 		WinGameImage.SetActive(true);
+		Time.timeScale = 0f;
+
 	}
 
 	private void HandleLoseGame()
 	{
 		winLosePanel.SetActive(true);
 		LoseGameImage.SetActive(true);
+		Time.timeScale = 0f;
 	}
 
 }

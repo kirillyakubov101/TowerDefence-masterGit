@@ -7,16 +7,19 @@ namespace TowerDefence.Combat
 	{
 		[SerializeField] float arrowSpeed;
 		[SerializeField] Health target; //remove the serialize
+		[SerializeField] ParticleSystem impactVFX = null;
 
 
 		float damage;
 		bool isHit = false;
+		Transform parent;
 
 
 		// Update is called once per frame
 		void Update()
 		{
 			if (target == null || isHit) { Destroy(gameObject); return; }
+	
 			transform.LookAt(target.transform.position);
 			transform.Translate(Vector3.forward * arrowSpeed * Time.deltaTime);
 		}
@@ -29,7 +32,7 @@ namespace TowerDefence.Combat
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.tag == "Ground")
+			if (other.CompareTag("Ground"))
 			{
 				isHit = true;
 				Destroy(gameObject, 5f);
@@ -39,6 +42,11 @@ namespace TowerDefence.Combat
 
 			if (enemy != null)
 			{
+				if(impactVFX != null)
+				{
+					GameObject inst = Instantiate(impactVFX.gameObject, transform.position,Quaternion.identity);
+					Destroy(inst, 2f);
+				}
 				enemy.takeDamage(damage);
 				Destroy(gameObject);
 			}

@@ -69,7 +69,6 @@ namespace TowerDefence.UI
 					break;
 
 				case "ghostCannon":
-					print("her");
 					price = TowerEconomics.cannonTowerPrice;
 					break;
 

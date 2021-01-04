@@ -15,6 +15,11 @@ namespace TowerDefence.AI
 		{
 			meshAgent = GetComponent<NavMeshAgent>();
 			enemySpawner = FindObjectOfType<EnemySpawner>();
+			
+		}
+
+		private void Start()
+		{
 			goalTransform = enemySpawner.GetTarget();
 		}
 

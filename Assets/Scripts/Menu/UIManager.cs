@@ -44,4 +44,11 @@ public class UIManager : MonoBehaviour
 		SceneManager.LoadScene(0);
 	}
 
+	public void ReloadTheLevel()
+	{
+		int currentIndex = SceneManager.GetActiveScene().buildIndex;
+		SceneManager.LoadSceneAsync(currentIndex);
+		
+	}
+
 }

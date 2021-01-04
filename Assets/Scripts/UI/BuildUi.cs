@@ -11,7 +11,7 @@ namespace TowerDefence.UI
 		[SerializeField] GameObject buildingTowersContainer;
 		[SerializeField] GameObject flag;
 
-		private void Awake()
+		private void Start()
 		{
 			buildingTowersContainer.SetActive(false);
 		}
