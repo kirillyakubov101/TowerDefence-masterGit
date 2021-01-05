@@ -72,6 +72,10 @@ namespace TowerDefence.UI
 					price = TowerEconomics.cannonTowerPrice;
 					break;
 
+				case "ghostMage":
+					price = TowerEconomics.mageTowerPrice;
+					break;
+
 
 			}
 			return price;

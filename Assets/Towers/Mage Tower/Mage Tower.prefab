@@ -220,6 +220,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -6656884528324239758, guid: 378d2447c8afcd548b625cba4dd4bb9f,
         type: 3}
+    - target: {fileID: 4946779268436017040, guid: aca600da4b31c9e49858fad1dc8890f0,
+        type: 3}
+      propertyPath: fireBall
+      value: 
+      objectReference: {fileID: -6656884528324239758, guid: 378d2447c8afcd548b625cba4dd4bb9f,
+        type: 3}
+    - target: {fileID: 4946779268436017040, guid: aca600da4b31c9e49858fad1dc8890f0,
+        type: 3}
+      propertyPath: delay
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aca600da4b31c9e49858fad1dc8890f0, type: 3}
 --- !u!4 &252416598078602255 stripped

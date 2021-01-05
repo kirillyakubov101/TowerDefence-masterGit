@@ -12,7 +12,6 @@ namespace TowerDefence.Combat
 
 		float damage;
 		bool isHit = false;
-		Transform parent;
 
 
 		// Update is called once per frame

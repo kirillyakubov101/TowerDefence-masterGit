@@ -14,20 +14,21 @@ namespace TowerDefence.Core
 		[SerializeField] Text goldPoints;
 		[SerializeField] Text lifePoints;
 
-		//remove or change
-		EnemySpawner enemySpawner;
-
 
 		public static event Action WonGame;
 		public static event Action LostGame;
 
+		int numberOfEnemies;
+		SpawnerHandler spawnerHandler;
+
 		private void Awake()
 		{
-			enemySpawner = FindObjectOfType<EnemySpawner>();
+			spawnerHandler = FindObjectOfType<SpawnerHandler>();
 		}
 
 		private void Start()
 		{
+			numberOfEnemies = spawnerHandler.GetNumberOfEnemies();
 			Time.timeScale = 1f;
 		}
 
@@ -43,8 +44,8 @@ namespace TowerDefence.Core
 		}
 
 		private void CheckIfWon()
-		{
-			if (FindObjectsOfType<Health>().Length <= 0 && enemySpawner != null)
+		{	
+			if(numberOfEnemies <= 0)
 			{
 				WonGame?.Invoke();
 			}
@@ -52,6 +53,7 @@ namespace TowerDefence.Core
 
 		private void LoseLifePoint()
 		{
+			numberOfEnemies--;
 			lives--;
 		}
 
@@ -85,6 +87,11 @@ namespace TowerDefence.Core
 		public int GetGoldAmount()
 		{
 			return gold;
+		}
+
+		public void ReduceEnemy()
+		{
+			numberOfEnemies--;
 		}
 	}
 }

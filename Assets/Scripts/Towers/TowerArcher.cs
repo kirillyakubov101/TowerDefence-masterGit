@@ -37,14 +37,15 @@ namespace TowerDefence.Towers
 		private void AimAndShootManager()
 		{
 			if (enemy == null) { StopShooting(); return; }
-			float distance = Vector3.Distance(transform.parent.position, enemy.transform.position); //too expensive?
-			if (distance <= range)
+			float distance = Vector3.Distance(transform.parent.position, enemy.transform.position);
+			if (distance <= range + 2)
 			{
 				var lookPos = enemy.transform.position - transform.position;
 
 				lookPos.y = 0;
 				var rotation = Quaternion.LookRotation(lookPos);
 				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1f);
+				if (enemy == null) { StopShooting(); return; }
 				animator.SetBool("shoot", true);
 			}
 			else
@@ -75,12 +76,9 @@ namespace TowerDefence.Towers
 
 			foreach (var hit in hits)
 			{
-				if (hit.gameObject.GetComponent<Health>())
-					AssignNewEnemy(hit);
+				AssignNewEnemy(hit);
 				return;
 			}
-
-			enemy = null;
 		}
 
 		private void AssignNewEnemy(Collider hit)

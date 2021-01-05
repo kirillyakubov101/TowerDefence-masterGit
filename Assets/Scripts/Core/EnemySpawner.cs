@@ -6,12 +6,10 @@ namespace TowerDefence.Core
 {
 	public class EnemySpawner : MonoBehaviour
 	{
-		//[SerializeField] WaveConfig wave;
 		[SerializeField] List<WaveConfig> waves;
 		[SerializeField] Transform target;
 
-		//find it's purpose!!
-		//public bool hasStarted = true;
+		private int numberOfEnemies;
 
 		// Start is called before the first frame update
 		void Start()
@@ -43,6 +41,16 @@ namespace TowerDefence.Core
 				newEnemy.transform.parent = transform;
 				yield return new WaitForSeconds(wave.TimeBetweenSpawn());
 			}
+		}
+
+		public int GetSumOfEnemiesInAllWaves()
+		{
+			for (int i = 0; i < waves.Count; i++)
+			{
+				numberOfEnemies += waves[i].NumberOfEnemies();
+			}
+
+			return numberOfEnemies;
 		}
 	}
 }

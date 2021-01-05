@@ -4872,7 +4872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5a48e96dc303a47a2570fca21ecc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowSpeed: 25
+  arrowSpeed: 35
   target: {fileID: 0}
   impactVFX: {fileID: 2302457091073469191, guid: 1894ea96d3739c24b83518b1f7c624ce,
     type: 3}

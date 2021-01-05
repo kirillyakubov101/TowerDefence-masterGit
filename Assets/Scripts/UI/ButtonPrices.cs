@@ -9,11 +9,13 @@ public class ButtonPrices : MonoBehaviour
 	[SerializeField] Text archerTowerPriceValue = null;
 	[SerializeField] Text teslaTowerPriceValue = null;
 	[SerializeField] Text cannonTowerPriceValue = null;
+	[SerializeField] Text mageTowerPriceValue = null;
 
 	private void Update()
 	{
 		archerTowerPriceValue.text = TowerEconomics.archerTowerPrice.ToString();
 		teslaTowerPriceValue.text = TowerEconomics.teslaTowerPrice.ToString();
 		cannonTowerPriceValue.text = TowerEconomics.cannonTowerPrice.ToString();
+		mageTowerPriceValue.text = TowerEconomics.mageTowerPrice.ToString();
 	}
 }

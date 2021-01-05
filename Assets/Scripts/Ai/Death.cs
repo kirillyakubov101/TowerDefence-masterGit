@@ -29,6 +29,7 @@ namespace TowerDefence.AI
 			if (levelController) //it is avoid null in the sandBox, the IF can be removed later
 			{
 				levelController.GainGold(goldAmount);
+				levelController.ReduceEnemy();
 			}
 			
 			Destroy(gameObject, 1f);

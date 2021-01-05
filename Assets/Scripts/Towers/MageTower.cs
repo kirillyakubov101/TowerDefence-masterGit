@@ -9,15 +9,14 @@ namespace TowerDefence.Towers
 	public class MageTower : MonoBehaviour
 	{
 		[SerializeField] float range;
-		[SerializeField] Transform stuffPosition;
-		[SerializeField] Projectile arrow;
+		[SerializeField] Transform stuffPosition = null;
+		[SerializeField] Projectile fireBall = null;
 		[SerializeField] float damage = 25f;
-		[SerializeField] LayerMask mask;
+		[SerializeField] LayerMask mask = new LayerMask();
 
-		Health enemy;
+
+		[SerializeField] Health enemy;
 		Animator animator;
-
-		float closestEnemy;
 
 		Quaternion rotatationStart;
 		private void Awake()
@@ -29,7 +28,6 @@ namespace TowerDefence.Towers
 		void Start()
 		{
 			transform.rotation = rotatationStart;
-			closestEnemy = range;
 		}
 
 		// Update is called once per frame
@@ -37,12 +35,13 @@ namespace TowerDefence.Towers
 		{
 			CastSphere();
 			AimAndShootManager();
+
 		}
 
 		private void AimAndShootManager()
 		{
-			if (enemy == null) { return; }
-			float distance = Vector3.Distance(transform.parent.position, enemy.transform.position); //too expensive?
+			if (enemy == null) { StopShooting();  return; }
+			float distance = Vector3.Distance(transform.parent.position, enemy.transform.position);
 			if (distance <= range + 2)
 			{
 				var lookPos = enemy.transform.position - transform.position;
@@ -50,6 +49,7 @@ namespace TowerDefence.Towers
 				lookPos.y = 0;
 				var rotation = Quaternion.LookRotation(lookPos);
 				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1f);
+				if (enemy == null) { StopShooting(); return; }
 				animator.SetBool("shoot", true);
 			}
 			else
@@ -68,7 +68,7 @@ namespace TowerDefence.Towers
 		private void Hit()
 		{
 			if(enemy == null) { StopShooting(); return; }
-			var newArrow = Instantiate(arrow, stuffPosition.position, Quaternion.identity);
+			var newArrow = Instantiate(fireBall, stuffPosition.position, Quaternion.identity);
 			newArrow.AssignTarget(enemy, damage);
 
 		}
