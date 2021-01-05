@@ -132,3 +132,4 @@ MonoBehaviour:
     m_Bits: 256
   explosiveVFX: {fileID: 198194127032045410, guid: 34c92f560de2c54479eb02126014effc,
     type: 3}
+  audioSource: {fileID: 0}

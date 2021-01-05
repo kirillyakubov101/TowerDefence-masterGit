@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TowerDefence.AI;
 using TowerDefence.Combat;
@@ -18,6 +19,8 @@ public class CanonTower : MonoBehaviour
 	bool canShoot = true;
 
 	//U - initial velocity, V- final velocity
+
+	public static event Action onCannonBallLaunch;
 
 	private void Update()
 	{
@@ -81,6 +84,10 @@ public class CanonTower : MonoBehaviour
 	{
 		var newProjectile = Instantiate(ball, shootPoint.position, Quaternion.identity);
 		newProjectile.GetComponent<CanonBomb>().AssignTarget(enemy.transform,damage);
+
+		//sound event 
+		onCannonBallLaunch?.Invoke();
+
 		var smokeInstance = Instantiate(smokeEffect, shootPoint.position, Quaternion.identity);
 		Destroy(smokeInstance, smokeEffect.main.duration);
 		enemy = null;

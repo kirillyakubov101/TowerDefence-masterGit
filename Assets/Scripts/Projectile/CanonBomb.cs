@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TowerDefence.AI;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class CanonBomb : MonoBehaviour
 	[SerializeField] ParticleSystem explosiveVFX;
 	float gravity;
 	Rigidbody rb;
+
+	public static event Action onExplosion;
 
 	private void Awake()
 	{
@@ -59,7 +62,8 @@ public class CanonBomb : MonoBehaviour
 			Quaternion.identity
 			);
 
-
+		//event for the sound system
+		onExplosion?.Invoke();
 
 		var hits = Physics.OverlapSphere(transform.position, range, mask);
 

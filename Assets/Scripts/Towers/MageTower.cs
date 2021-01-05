@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TowerDefence.AI;
 using TowerDefence.Combat;
@@ -13,9 +14,11 @@ namespace TowerDefence.Towers
 		[SerializeField] Projectile fireBall = null;
 		[SerializeField] float damage = 25f;
 		[SerializeField] LayerMask mask = new LayerMask();
+		[SerializeField] AudioSource audioSource = null;
 
+		public static event Action onFireBallLaunch;
 
-		[SerializeField] Health enemy;
+		Health enemy;
 		Animator animator;
 
 		Quaternion rotatationStart;
@@ -45,11 +48,12 @@ namespace TowerDefence.Towers
 			if (distance <= range + 2)
 			{
 				var lookPos = enemy.transform.position - transform.position;
-
 				lookPos.y = 0;
 				var rotation = Quaternion.LookRotation(lookPos);
 				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1f);
+
 				if (enemy == null) { StopShooting(); return; }
+
 				animator.SetBool("shoot", true);
 			}
 			else
@@ -70,6 +74,9 @@ namespace TowerDefence.Towers
 			if(enemy == null) { StopShooting(); return; }
 			var newArrow = Instantiate(fireBall, stuffPosition.position, Quaternion.identity);
 			newArrow.AssignTarget(enemy, damage);
+
+			//For the Sound System
+			onFireBallLaunch?.Invoke();
 
 		}
 
@@ -97,7 +104,6 @@ namespace TowerDefence.Towers
 			animator.SetBool("shoot", false);
 			//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * .5f); //maybe remove this, it rotates the archer back
 			enemy = null;
-
 		}
 	}
 }
