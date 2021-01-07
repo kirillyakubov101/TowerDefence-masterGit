@@ -9,22 +9,26 @@ namespace TowerDefence.Towers
 	public class EmpySlot : MonoBehaviour
 	{
 		[Header("Archer")]
-		[SerializeField] Tower archerTower = null; //check if i can change all to TOWER script
+		[SerializeField] Tower archerTower = null; 
+		[SerializeField] Transform archerTowerPos = null;
 		[Header("Tesla")]
-		[SerializeField] TeslaTower teslaTower = null;
+		[SerializeField] Tower teslaTower = null;
+		[SerializeField] Transform teslaTowerPos = null;
 		[Header("Cannon")]
-		[SerializeField] CanonTower canonTower = null;
+		[SerializeField] Tower cannonTower = null;
+		[SerializeField] Transform cannonTowerPos = null;
 		[Header("Mage")]
 		[SerializeField] Tower mageTower = null;
+		[SerializeField] Transform mageTowerPos = null;
 		[Header("UI")]
 		[SerializeField] BuildUi buildUI = null;
 		[SerializeField] Animator animator = null;
 		[Header("Flag")]
 		[SerializeField] Renderer flagMat = null;
+		[Header("Smoke Particle Effect")]
+		[SerializeField] Transform smokePartcileTransform = null;
+		[SerializeField] ParticleSystem smokeParticleEffect = null;
 
-		[SerializeField] Transform towerPlace = null;
-
-		Vector3 newTowerPos;
 		LevelController levelController;
 		Color flagColor;
 
@@ -43,7 +47,6 @@ namespace TowerDefence.Towers
 		private void Start()
 		{
 			InitializeTowerPrices();
-			newTowerPos = towerPlace.position;
 			flagColor = new Color(248f, 41f, 31f);
 		}
 
@@ -71,8 +74,10 @@ namespace TowerDefence.Towers
 
 			if (levelController.GetGoldAmount() >= ArcherTowerPrice)
 			{
+				archerTowerPos.position = AdjustNewTowerPosition(archerTowerPos);
 				levelController.PayForTower(ArcherTowerPrice);
-				Instantiate(archerTower, newTowerPos, transform.rotation);
+				Instantiate(archerTower, archerTowerPos.position, transform.rotation);
+				SmokeTrainAfterBuild();
 				SelfDestroyPaltform();
 			}
 		}
@@ -81,8 +86,10 @@ namespace TowerDefence.Towers
 		{
 			if (levelController.GetGoldAmount() >= TeslaTowerPrice)
 			{
+				teslaTowerPos.position = AdjustNewTowerPosition(teslaTowerPos);
 				levelController.PayForTower(TeslaTowerPrice);
-				Instantiate(teslaTower, newTowerPos, transform.rotation);
+				Instantiate(teslaTower, teslaTowerPos.position, transform.rotation);
+				SmokeTrainAfterBuild();
 				SelfDestroyPaltform();
 			}
 		}
@@ -91,8 +98,10 @@ namespace TowerDefence.Towers
 		{
 			if (levelController.GetGoldAmount() >= CannonTowerPrice)
 			{
+				cannonTowerPos.position = AdjustNewTowerPosition(cannonTowerPos);
 				levelController.PayForTower(CannonTowerPrice);
-				Instantiate(canonTower, newTowerPos, transform.rotation);
+				Instantiate(cannonTower, cannonTowerPos.position, transform.rotation);
+				SmokeTrainAfterBuild();
 				SelfDestroyPaltform();
 			}
 		}
@@ -101,8 +110,10 @@ namespace TowerDefence.Towers
 		{
 			if (levelController.GetGoldAmount() >= mageTowerPrice)
 			{
+				mageTowerPos.position = AdjustNewTowerPosition(mageTowerPos);
 				levelController.PayForTower(mageTowerPrice);
-				Instantiate(mageTower, newTowerPos, transform.rotation);
+				Instantiate(mageTower, mageTowerPos.position, transform.rotation);
+				SmokeTrainAfterBuild();
 				SelfDestroyPaltform();
 			}
 		}
@@ -120,6 +131,17 @@ namespace TowerDefence.Towers
 			CannonTowerPrice = TowerEconomics.cannonTowerPrice;
 			mageTowerPrice = TowerEconomics.mageTowerPrice;
 
+		}
+
+		private Vector3 AdjustNewTowerPosition(Transform towerPos)
+		{
+			towerPos.position = new Vector3(towerPos.position.x, towerPos.position.y - 5, towerPos.position.z);
+			return towerPos.position;
+		}
+
+		private void SmokeTrainAfterBuild()
+		{
+			Instantiate(smokeParticleEffect, smokePartcileTransform.position, smokePartcileTransform.rotation);
 		}
 
 	}

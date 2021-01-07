@@ -61,6 +61,7 @@ namespace TowerDefence.Core
 		{
 			if (lives <= 0)
 			{
+				lives = 0;
 				LostGame?.Invoke();
 			}
 		}

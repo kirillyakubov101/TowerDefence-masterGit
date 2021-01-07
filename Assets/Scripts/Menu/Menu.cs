@@ -11,6 +11,8 @@ public class Menu : MonoBehaviour
 	[SerializeField] private GameObject LoseGameImage = null;
 	[SerializeField] private GameObject winLosePanel = null;
 
+	bool isWon = false;
+
 	private void Start()
 	{
 		LevelController.WonGame += HandleWinGame;
@@ -40,17 +42,32 @@ public class Menu : MonoBehaviour
 
 	private void HandleWinGame()
 	{
-		winLosePanel.SetActive(true);
-		WinGameImage.SetActive(true);
-		Time.timeScale = 0f;
-
+		isWon = true;
+		StartCoroutine(WinLoseConditionScreen());
 	}
 
 	private void HandleLoseGame()
 	{
-		winLosePanel.SetActive(true);
-		LoseGameImage.SetActive(true);
-		Time.timeScale = 0f;
+		isWon = false;
+		StartCoroutine(WinLoseConditionScreen());
+	}
+
+	private IEnumerator WinLoseConditionScreen()
+	{
+		if(isWon)
+		{
+			yield return new WaitForSeconds(2f);
+			winLosePanel.SetActive(true);
+			WinGameImage.SetActive(true);
+			Time.timeScale = 0f;
+		}
+		else
+		{
+			yield return new WaitForSeconds(2f);
+			winLosePanel.SetActive(true);
+			LoseGameImage.SetActive(true);
+			Time.timeScale = 0f;
+		}
 	}
 
 }
