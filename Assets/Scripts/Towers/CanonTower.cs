@@ -88,8 +88,8 @@ public class CanonTower : MonoBehaviour
 		//sound event 
 		onCannonBallLaunch?.Invoke();
 
-		var smokeInstance = Instantiate(smokeEffect, shootPoint.position, Quaternion.identity);
-		Destroy(smokeInstance, smokeEffect.main.duration);
+		Instantiate(smokeEffect, shootPoint.position, Quaternion.identity);
+
 		enemy = null;
 	}
 }

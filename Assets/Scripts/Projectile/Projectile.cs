@@ -43,8 +43,7 @@ namespace TowerDefence.Combat
 			{
 				if(impactVFX != null)
 				{
-					GameObject inst = Instantiate(impactVFX.gameObject, transform.position,Quaternion.identity);
-					Destroy(inst, 2f);
+					Instantiate(impactVFX.gameObject, transform.position,Quaternion.identity);
 				}
 				enemy.takeDamage(damage);
 				Destroy(gameObject);

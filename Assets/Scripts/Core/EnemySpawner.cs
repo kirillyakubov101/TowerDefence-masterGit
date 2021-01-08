@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TowerDefence.AI;
 using UnityEngine;
 
 namespace TowerDefence.Core
@@ -39,6 +40,7 @@ namespace TowerDefence.Core
 			{
 				var newEnemy = Instantiate(wave.GetEnemyPrefab(), transform.position, Quaternion.identity);
 				newEnemy.transform.parent = transform;
+				newEnemy.GetComponent<AiController>().AssignPath(target);
 				yield return new WaitForSeconds(wave.TimeBetweenSpawn());
 			}
 		}

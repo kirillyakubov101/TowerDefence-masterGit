@@ -1,5 +1,4 @@
-﻿using TowerDefence.Core;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace TowerDefence.AI
@@ -8,25 +7,18 @@ namespace TowerDefence.AI
 	{
 
 		NavMeshAgent meshAgent;
-		EnemySpawner enemySpawner;
-		Transform goalTransform;
+		Transform goalTransform = null;
 
 		private void Awake()
 		{
 			meshAgent = GetComponent<NavMeshAgent>();
-			enemySpawner = FindObjectOfType<EnemySpawner>();
 			
 		}
 
-		private void Start()
-		{
-			goalTransform = enemySpawner.GetTarget();
-		}
-
-		// Update is called once per frame
 		void Update()
 		{
-			if(enemySpawner == null) { return; }
+			if(goalTransform == null) { return; }
+
 			meshAgent.destination = goalTransform.position;
 
 		}
@@ -34,6 +26,11 @@ namespace TowerDefence.AI
 		public void StopAgent()
 		{
 			meshAgent.isStopped = true;
+		}
+
+		public void AssignPath(Transform path)
+		{
+			goalTransform = path;
 		}
 	}
 

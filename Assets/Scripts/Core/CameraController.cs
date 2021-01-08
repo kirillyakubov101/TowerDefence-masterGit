@@ -30,22 +30,23 @@ namespace TowerDefence.Core
 			float xInput = Input.GetAxis("Horizontal");
 			float zInput = Input.GetAxis("Vertical");
 
+
 			if (screenLeftXBorder.position.z >= transform.position.z && xInput < 0)
 			{
 				xInput = 0f;
 			}
 
-			else if (screenRightXBorder.position.z <= transform.position.z && xInput > 0)
+			if (screenRightXBorder.position.z <= transform.position.z && xInput > 0)
 			{
 				xInput = 0f;
 			}
 
-			else if(screenTopYBorder.position.x >= transform.position.x && zInput > 0)
+			if(screenTopYBorder.position.x >= transform.position.x && zInput > 0)
 			{
 				zInput = 0f;
 			}
 
-			else if(screenBotYBorder.position.x <= transform.position.x && zInput < 0)
+			if(screenBotYBorder.position.x <= transform.position.x && zInput < 0)
 			{
 				zInput = 0f;
 			}

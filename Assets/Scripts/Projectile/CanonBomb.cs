@@ -78,7 +78,7 @@ public class CanonBomb : MonoBehaviour
 
 			
 
-		Destroy(gameObject, explosiveVFX.main.duration +0.2f);
+		Destroy(gameObject);
 		
 	}
 }

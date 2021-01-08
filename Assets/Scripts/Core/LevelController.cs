@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TowerDefence.AI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +27,16 @@ namespace TowerDefence.Core
 		{
 			numberOfEnemies = spawnerHandler.GetNumberOfEnemies();
 			Time.timeScale = 1f;
+		}
+
+		private void OnEnable()
+		{
+			FinishLine.onFinishLineCrossed += HandleFinishLineCrossed;
+		}
+
+		private void OnDisable()
+		{
+			FinishLine.onFinishLineCrossed -= HandleFinishLineCrossed;
 		}
 
 		// Update is called once per frame
@@ -66,13 +73,19 @@ namespace TowerDefence.Core
 			}
 		}
 
-		private void OnTriggerEnter(Collider other)
+		/*private void OnTriggerEnter(Collider other)
 		{
 			if (other.tag == "Enemy")
 			{
 				LoseLifePoint();
 				Destroy(other.gameObject);
 			}
+		}*/
+
+		private void HandleFinishLineCrossed(GameObject enemyObj)
+		{
+			LoseLifePoint();
+			Destroy(enemyObj);
 		}
 
 		public void GainGold(int goldAmount)
