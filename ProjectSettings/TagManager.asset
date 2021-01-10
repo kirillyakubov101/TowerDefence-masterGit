@@ -11,6 +11,7 @@ TagManager:
   - Tower
   - ghostCannon
   - ghostMage
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - particle
   - CameraBorder
   - Projectiles
-  - 
+  - Friendly
   - 
   - 
   - 

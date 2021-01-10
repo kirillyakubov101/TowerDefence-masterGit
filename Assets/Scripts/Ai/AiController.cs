@@ -20,6 +20,7 @@ namespace TowerDefence.AI
 			if(goalTransform == null) { return; }
 
 			meshAgent.destination = goalTransform.position;
+			
 
 		}
 
@@ -28,10 +29,21 @@ namespace TowerDefence.AI
 			meshAgent.isStopped = true;
 		}
 
+		public void StartAgent()
+		{
+			meshAgent.isStopped = false;
+		}
+
 		public void AssignPath(Transform path)
 		{
 			goalTransform = path;
 		}
+
+		public Transform GetOriginalPath()
+		{
+			return goalTransform;
+		}
+
 	}
 
 }

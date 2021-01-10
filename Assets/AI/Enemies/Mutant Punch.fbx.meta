@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 03387ba6282a98448af337fcf1184164
+guid: 3c9bb7b3283cba8408ceb317a4e43d7e
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Shoot
+    second: MutantAttack
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Shoot
+      name: MutantAttack
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 12.5
+      lastFrame: 33
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,7 +59,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.4235305
+      - time: 0.5031447
         functionName: Hit
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -82,7 +82,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    fileIdsGeneration: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

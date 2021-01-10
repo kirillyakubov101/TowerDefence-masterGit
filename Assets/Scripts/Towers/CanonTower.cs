@@ -15,8 +15,8 @@ public class CanonTower : MonoBehaviour
 	[SerializeField] Transform shootPoint;
 	[SerializeField] float delayMax = 5f;
 	[SerializeField] ParticleSystem smokeEffect = null;
+
 	float shootDelay = 0f;
-	bool canShoot = true;
 
 	//U - initial velocity, V- final velocity
 
@@ -44,8 +44,10 @@ public class CanonTower : MonoBehaviour
 		foreach (var hit in hits)
 		{
 			if (hit.gameObject.GetComponent<Health>())
+			{
 				AssignNewEnemy(hit);
-			return;
+				return;
+			}
 		}
 
 		enemy = null;

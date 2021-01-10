@@ -15,7 +15,7 @@ namespace TowerDefence.Core
 		public static event Action WonGame;
 		public static event Action LostGame;
 
-		int numberOfEnemies;
+		[SerializeField] int numberOfEnemies;
 		SpawnerHandler spawnerHandler;
 
 		private void Awake()
