@@ -6,11 +6,18 @@ namespace TowerDefence.AI
 	{
 		[SerializeField] float health = 100f;
 
+		float maxHealth;
+
 		Death death;
 
 		private void Awake()
 		{
 			death = GetComponent<Death>();
+		}
+
+		private void Start()
+		{
+			maxHealth = health;
 		}
 
 		public void takeDamage(float damage)
@@ -29,6 +36,11 @@ namespace TowerDefence.AI
 		public float GetHealth()
 		{
 			return health;
+		}
+
+		public float GetMaxHealth()
+		{
+			return maxHealth;
 		}
 	}
 }

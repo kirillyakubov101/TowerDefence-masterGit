@@ -8,7 +8,42 @@ namespace TowerDefence.Friendly
 	{
 		[SerializeField] private bool isFightingSomeone = false;
 		[SerializeField] float health = 20f;
+		[SerializeField] Animator animator = null;
+		[SerializeField] float range = 2f;
+		[SerializeField] LayerMask mask = new LayerMask();
 
+		[SerializeField] Fighter enemy = null;
+
+		private void Update()
+		{
+			CastSphere();
+		}
+
+		private void CastSphere()
+		{
+			if (enemy != null) { return; }
+			var hits = Physics.OverlapSphere(transform.position, range, mask);
+
+			foreach (var hit in hits)
+			{
+				AssignNewEnemy(hit);
+				return;
+			}
+		}
+
+		private void AssignNewEnemy(Collider hit)
+		{
+			enemy = hit.gameObject.GetComponent<Fighter>();
+			LookTowardsEnemy();
+			animator.SetBool("attack", true);
+		}
+
+		private void LookTowardsEnemy()
+		{
+			Vector3 lookDirection = enemy.transform.position - transform.position;
+			lookDirection.y = 0;
+			transform.rotation = Quaternion.LookRotation(lookDirection);
+		}
 
 		public void TakeDamage(float damage,Fighter instigator)
 		{

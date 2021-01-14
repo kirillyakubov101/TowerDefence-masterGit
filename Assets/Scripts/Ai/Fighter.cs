@@ -49,9 +49,8 @@ namespace TowerDefence.AI
 				if (!tempComparedObject.GetIsFightingSomeone())
 				{
 					AssignNewEnemy(hit);
+					return;
 				}
-					
-				return;
 			}
 
 			enemy = null;
@@ -72,9 +71,7 @@ namespace TowerDefence.AI
 			//when reached, look at and attack the target
 			else
 			{
-				var lookDirection = enemy.transform.position - transform.position;
-				lookDirection.y = 0;
-				transform.rotation = Quaternion.LookRotation(lookDirection);
+				LookTowardsEnemy();
 				animator.SetBool("attack", true); //use the same paramater name for every animation instance
 				aiController.StopAgent();
 			}
@@ -99,6 +96,13 @@ namespace TowerDefence.AI
 		{
 			Gizmos.color = Color.green;
 			Gizmos.DrawWireSphere(transform.position, searchRange);
+		}
+
+		private void LookTowardsEnemy()
+		{
+			Vector3 lookDirection = enemy.transform.position - transform.position;
+			lookDirection.y = 0;
+			transform.rotation = Quaternion.LookRotation(lookDirection);
 		}
 	}
 }
