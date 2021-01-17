@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8539379552078652943}
-  - component: {fileID: 3596489471572353538}
   - component: {fileID: 3798068253744507138}
   m_Layer: 0
   m_Name: Target
@@ -32,19 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3596489471572353538
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8539379552078652942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3798068253744507138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b346c845c3e8346adb53161c1c3eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lives: 20
-  gold: 100
+  lives: 5
+  gold: 200
   goldPoints: {fileID: 0}
   lifePoints: {fileID: 0}
+  numberOfEnemies: 0

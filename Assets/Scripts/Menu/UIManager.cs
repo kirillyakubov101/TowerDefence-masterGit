@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
 	[SerializeField] AudioClip startButtonClip = null;
+	[SerializeField] float startGameDelayTime = 3f;
 	AudioSource audioSource;
 
 	private void Awake()
@@ -28,9 +28,9 @@ public class UIManager : MonoBehaviour
 		audioSource.clip = startButtonClip;
 		audioSource.Play();
 		
-		yield return new WaitForSeconds(startButtonClip.length);
+		yield return new WaitForSeconds(startGameDelayTime);
 		Time.timeScale = 1f;
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(1); //change to "NOT A MAGIC NUMBER"
 	}
 
 	public void QuitGame()
@@ -49,6 +49,20 @@ public class UIManager : MonoBehaviour
 		int currentIndex = SceneManager.GetActiveScene().buildIndex;
 		SceneManager.LoadSceneAsync(currentIndex);
 		
+	}
+
+	public void NextLevel()
+	{
+	
+		int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+		if (currentLevelIndex != SceneManager.sceneCountInBuildSettings-1)
+		{
+			SceneManager.LoadScene(currentLevelIndex + 1);
+		}
+		else
+		{
+			LoadMenuScene();
+		}
 	}
 
 }
