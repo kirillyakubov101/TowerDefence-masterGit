@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
 	[SerializeField] AudioClip startButtonClip = null;
-	[SerializeField] float startGameDelayTime = 3f;
+	[SerializeField] float startGameDelayTime = 1.5f;
 	AudioSource audioSource;
 
 	private void Awake()
@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 	{
 		StartCoroutine(StartGame());	
 	}
-
+	//remove this function, it does the same thing as "LoadNextLevel" but with the start sound. make a different method for the sound 
 	private IEnumerator StartGame()
 	{
 		if(startButtonClip == null)
@@ -30,7 +30,9 @@ public class UIManager : MonoBehaviour
 		
 		yield return new WaitForSeconds(startGameDelayTime);
 		Time.timeScale = 1f;
-		SceneManager.LoadScene(1); //change to "NOT A MAGIC NUMBER"
+		//SceneManager.LoadScene(1); //change to "NOT A MAGIC NUMBER"
+		FindObjectOfType<Fader>().FadeInAction();
+		StartCoroutine(NextLevel());
 	}
 
 	public void QuitGame()
@@ -40,8 +42,8 @@ public class UIManager : MonoBehaviour
 
 	public void LoadMenuScene()
 	{
-		Time.timeScale = 1f;
 		SceneManager.LoadScene(0);
+		Time.timeScale = 1f;
 	}
 
 	public void ReloadTheLevel()
@@ -51,16 +53,24 @@ public class UIManager : MonoBehaviour
 		
 	}
 
-	public void NextLevel()
+	public void LoadNextLevel()
 	{
-	
+		FindObjectOfType<Fader>().FadeInAction();
+		StartCoroutine(NextLevel());
+	}
+
+	private IEnumerator NextLevel()
+	{
+		Time.timeScale = 1f;
 		int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
 		if (currentLevelIndex != SceneManager.sceneCountInBuildSettings-1)
 		{
+			yield return new WaitForSeconds(1f);
 			SceneManager.LoadScene(currentLevelIndex + 1);
 		}
 		else
 		{
+			yield return new WaitForSeconds(1f);
 			LoadMenuScene();
 		}
 	}

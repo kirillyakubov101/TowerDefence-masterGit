@@ -7,33 +7,44 @@ public class Fader : MonoBehaviour
     [SerializeField] CanvasGroup canvasGroup = null;
     [SerializeField] float fadeTime = 2f;
 
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+	private void Awake()
+	{
+        int faderAmount = FindObjectsOfType<Fader>().Length;
+        if (faderAmount > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+		{
+            DontDestroyOnLoad(gameObject);
+        }
+        
+	}
 
 	private void OnEnable()
 	{
-        SceneManager.sceneLoaded += ShowNextScene;
+        SceneManager.sceneLoaded += FadeOutAction;
     }
 
 	private void OnDisable()
 	{
-        SceneManager.sceneLoaded -= ShowNextScene;
+        SceneManager.sceneLoaded -= FadeOutAction;
     }
 
-    //fade out to black
-	public void FadeOutToNextScene()
+    private void FadeOutAction(Scene sc, LoadSceneMode mode)
+	{
+        Time.timeScale = 1f;
+        canvasGroup.alpha = 1;
+        StartCoroutine(FadeOut());
+	}
+
+    public void FadeInAction()
 	{
         StartCoroutine(FadeIn());
 	}
 
-    //when scene loads, fade out
-    private void ShowNextScene(Scene scene,LoadSceneMode mode)
-	{
-        StartCoroutine(FadeOut());
-    }
-
+    
+    
     //from white to black
     IEnumerator FadeIn()
 	{
@@ -50,7 +61,7 @@ public class Fader : MonoBehaviour
     {
         while (canvasGroup.alpha > 0)
         {
-            canvasGroup.alpha -= Time.deltaTime / 4;
+            canvasGroup.alpha -= Time.deltaTime / fadeTime;
 
             yield return null;
         }

@@ -11,6 +11,7 @@ namespace TowerDefence.Core
 		[SerializeField] Text goldPoints;
 		[SerializeField] Text lifePoints;
 
+		bool isGameOver = false;
 
 		public static event Action WonGame;
 		public static event Action LostGame;
@@ -52,9 +53,10 @@ namespace TowerDefence.Core
 
 		private void CheckIfWon()
 		{	
-			if(numberOfEnemies <= 0)
+			if(numberOfEnemies <= 0 && !isGameOver)
 			{
 				WonGame?.Invoke();
+				isGameOver = true;
 			}
 		}
 
@@ -66,10 +68,11 @@ namespace TowerDefence.Core
 
 		private void CheckIfLost()
 		{
-			if (lives <= 0)
+			if (lives <= 0 && !isGameOver)
 			{
 				lives = 0;
 				LostGame?.Invoke();
+				isGameOver = true;
 			}
 		}
 
