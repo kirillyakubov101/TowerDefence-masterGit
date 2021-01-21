@@ -22,14 +22,15 @@ namespace TowerDefence.AI
 
 		public void takeDamage(float damage)
 		{
-			if (damage >= health)
+			health = Mathf.Max(health - damage,0);
+			
+			if(health == 0)
 			{
-				health = 0;
+
 				death.Die();
+
 				Destroy(this);
 			}
-
-			health -= damage;
 
 		}
 

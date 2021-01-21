@@ -45,6 +45,12 @@ namespace TowerDefence.Friendly
 			transform.rotation = Quaternion.LookRotation(lookDirection);
 		}
 
+		private void StopAttacking()
+		{
+			animator.SetBool("attack", false);
+			isFightingSomeone = false;
+		}
+
 		public void TakeDamage(float damage,Fighter instigator)
 		{
 			health = Mathf.Max(health - damage, 0f);

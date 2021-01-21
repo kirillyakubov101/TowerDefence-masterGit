@@ -15,7 +15,7 @@ namespace TowerDefence.AI
 
 		public static event Action onCoinGained;
 
-
+		private bool isDead = false;
 
 		// Start is called before the first frame update
 		void Awake()
@@ -27,6 +27,8 @@ namespace TowerDefence.AI
 
 		public void Die()
 		{
+			if(isDead == true) { return; }
+			isDead = true;
 			animator.SetTrigger("die");
 			aiController.StopAgent();
 			deathCoins.Play();
