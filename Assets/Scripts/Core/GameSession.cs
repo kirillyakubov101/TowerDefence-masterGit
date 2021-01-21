@@ -6,9 +6,22 @@ namespace TowerDefence.Core
 {
 	public class GameSession : MonoBehaviour
 	{
+		public Texture2D defaultCursor = null;
+
+		private void Start()
+		{
+			Cursor.SetCursor(defaultCursor, Vector3.zero, CursorMode.Auto);
+		}
+
 		private void Update()
 		{
 			//IF the ground is being clicked
+			CheckRandomClicks();
+
+		}
+
+		private void CheckRandomClicks()
+		{
 			if (Input.GetMouseButtonUp(0))
 			{
 				RaycastHit hit;
@@ -21,7 +34,6 @@ namespace TowerDefence.Core
 					}
 				}
 			}
-
 		}
 
 		private Ray mouseRay()

@@ -1,17 +1,32 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using TowerDefence.Core;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SpawnMeteors : MonoBehaviour,ISpawnable
 {
 	[SerializeField] GameObject meteorsPrefab = null;
 	[SerializeField] LayerMask mask = new LayerMask();
+	[SerializeField] LayerMask UImask = new LayerMask();
+	
 	[SerializeField] float spawnCoolDown = 1f;
 	[SerializeField] Image image = null;
 	[SerializeField] Button btn = null;
 	[SerializeField] Vector3 spawnHightOffset = Vector3.zero;
 
+	[SerializeField] Texture2D wrongPlacementTexture = null;
+
 	float fillAmount = 1;   //the image fill amount
 	public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
+
+	//cache it for the cursor change
+	GameSession gameSession;
+
+	private void Awake()
+	{
+		gameSession = FindObjectOfType<GameSession>();
+	}
 
 	public void AssignSpecialSkill()
 	{
@@ -39,7 +54,12 @@ public class SpawnMeteors : MonoBehaviour,ISpawnable
 		//left mouse click
 		if (Input.GetMouseButtonDown(0) && btn.interactable && isPrefabReady)
 		{
-			//hit only the spawn triggers
+			//avoid raycast through buttons
+			if(EventSystem.current.IsPointerOverGameObject())
+			{
+				return;
+			}
+				//hit only the spawn triggers
 			if (Physics.Raycast(MouseToRay(), out RaycastHit hit, Mathf.Infinity, mask))
 			{
 				GameObject meteorsInstace = Instantiate(meteorsPrefab, hit.point + spawnHightOffset, Quaternion.identity);
@@ -53,6 +73,7 @@ public class SpawnMeteors : MonoBehaviour,ISpawnable
 			//if something "wrong" was pressed, reset the btn
 			else
 			{
+				StartCoroutine(ChangeCursor(wrongPlacementTexture));
 				isPrefabReady = false;
 			}
 		}
@@ -69,5 +90,14 @@ public class SpawnMeteors : MonoBehaviour,ISpawnable
 	{
 		ProccessSpawn();
 		image.fillAmount = fillAmount;
+	}
+
+	private IEnumerator ChangeCursor(Texture2D texture)
+	{
+		Cursor.SetCursor(texture, Vector3.zero, CursorMode.Auto);
+
+		yield return new WaitForSeconds(0.2f);
+
+		Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
 	}
 }

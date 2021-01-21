@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
+using TowerDefence.Core;
+using UnityEngine.EventSystems;
 
 public class SpawnFriendly : MonoBehaviour,ISpawnable
 {
@@ -9,10 +12,18 @@ public class SpawnFriendly : MonoBehaviour,ISpawnable
 	[SerializeField] Image image = null;
 	[SerializeField] Button btn = null;
 
+	[SerializeField] Texture2D wrongPlacementTexture = null;
+
 	float fillAmount = 1;   //the image fill amount
 	public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
 
+	//cache it for the cursor change
+	GameSession gameSession;
 
+	private void Awake()
+	{
+		gameSession = FindObjectOfType<GameSession>();
+	}
 
 	private void Update()
 	{
@@ -32,6 +43,12 @@ public class SpawnFriendly : MonoBehaviour,ISpawnable
 	{
 		//check if CoolDown HAS PASSED
 		ProccessFillAmount();
+
+		//avoid raycast through buttons
+		if (EventSystem.current.IsPointerOverGameObject())
+		{
+			return;
+		}
 
 		//left mouse click
 		if (Input.GetMouseButtonDown(0) && btn.interactable && isPrefabReady)
@@ -55,11 +72,21 @@ public class SpawnFriendly : MonoBehaviour,ISpawnable
 			//if something "wrong" was pressed, reset the btn
 			else
 			{
-				isPrefabReady = false;
+				StartCoroutine(ChangeCursor(wrongPlacementTexture));
+				isPrefabReady = false; //can add a small 'X' to disable the prefab selection
 			}
 		}
 
 
+	}
+
+	private IEnumerator ChangeCursor(Texture2D texture)
+	{
+		Cursor.SetCursor(texture, Vector3.zero, CursorMode.Auto);
+
+		yield return new WaitForSeconds(0.2f);
+
+		Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
 	}
 
 	//increment the fill amount based on time
