@@ -1119,6 +1119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFightingSomeone: 0
   health: 999
+  damage: 2
   animator: {fileID: 4763418437404072034}
   range: 2
   mask:

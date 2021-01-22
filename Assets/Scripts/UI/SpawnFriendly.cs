@@ -3,110 +3,129 @@ using UnityEngine;
 using UnityEngine.UI;
 using TowerDefence.Core;
 using UnityEngine.EventSystems;
+using System;
+using TowerDefence.Friendly;
 
-public class SpawnFriendly : MonoBehaviour,ISpawnable
+namespace TowerDefence.UI
 {
-	[SerializeField] GameObject friendlyPrefab = null;
-	[SerializeField] LayerMask mask = new LayerMask();
-	[SerializeField] float spawnCoolDown = 1f;
-	[SerializeField] Image image = null;
-	[SerializeField] Button btn = null;
-
-	[SerializeField] Texture2D wrongPlacementTexture = null;
-
-	float fillAmount = 1;   //the image fill amount
-	public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
-
-	//cache it for the cursor change
-	GameSession gameSession;
-
-	private void Awake()
+	public class SpawnFriendly : MonoBehaviour, ISpawnable
 	{
-		gameSession = FindObjectOfType<GameSession>();
-	}
+		[SerializeField] GameObject friendlyPrefab = null;
+		[SerializeField] LayerMask mask = new LayerMask();
+		[SerializeField] float spawnCoolDown = 1f;
+		[SerializeField] Image image = null;
+		[SerializeField] Button btn = null;
+		[SerializeField] Texture2D wrongPlacementTexture = null;
 
-	private void Update()
-	{
-		
-		ProccessSpawn();
+		public static event Action<Vector3> OnFriendlySpawn; //event to notify the handler
+		public static event Action<GameObject> OnFriendlySelect;
 
-		image.fillAmount = fillAmount;
-	}
+		float fillAmount = 1;   //the image fill amount
+		public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
 
-	//whenever the btn gets clicked, give the green light to spawn
-	public void AssignSpecialSkill()
-	{
-		isPrefabReady = true;
-	}
+		//cache it for the cursor change
+		GameSession gameSession;
 
-	public void ProccessSpawn()
-	{
-		//check if CoolDown HAS PASSED
-		ProccessFillAmount();
-
-		//avoid raycast through buttons
-		if (EventSystem.current.IsPointerOverGameObject())
+		private void OnEnable()
 		{
-			return;
+			SpecialSkillsHandler.OnFriendlySpawnComplete += HandleSpawnComplete;
 		}
 
-		//left mouse click
-		if (Input.GetMouseButtonDown(0) && btn.interactable && isPrefabReady)
+		private void OnDisable()
 		{
-			//hit only the spawn triggers
-			if (Physics.Raycast(MouseToRay(), out RaycastHit hit, Mathf.Infinity, mask))
+			SpecialSkillsHandler.OnFriendlySpawnComplete -= HandleSpawnComplete;
+		}
+
+		private void Awake()
+		{
+			gameSession = FindObjectOfType<GameSession>();
+		}
+
+		private void Update()
+		{
+
+			ProccessSpawn();
+
+			image.fillAmount = fillAmount;
+		}
+
+		//whenever the btn gets clicked, give the green light to spawn
+		public void AssignSpecialSkill()
+		{
+			OnFriendlySelect?.Invoke(friendlyPrefab);
+			isPrefabReady = true;
+		}
+
+		public void ProccessSpawn()
+		{
+			//check if CoolDown HAS PASSED
+			ProccessFillAmount();
+
+			//avoid raycast through buttons
+			if (EventSystem.current.IsPointerOverGameObject())
 			{
-				float randomX = Random.Range(-2, 2); //random offset to avoid stack spawn
-				float randomZ = Random.Range(-2, 2);
-				Vector3 spawnOffSet = new Vector3(randomX, 0, randomZ);
-
-				Instantiate(friendlyPrefab, hit.point, Quaternion.identity);
-				Instantiate(friendlyPrefab, hit.point + spawnOffSet, Quaternion.identity);
-
-
-				//reset the fill and make the prefab "NOT" ready again to make the user click again
-				fillAmount = 0;
-				isPrefabReady = false;
-
+				return;
 			}
-			//if something "wrong" was pressed, reset the btn
-			else
+
+			//left mouse click
+			if (Input.GetMouseButtonDown(0) && btn.interactable && isPrefabReady)
 			{
-				StartCoroutine(ChangeCursor(wrongPlacementTexture));
-				isPrefabReady = false; //can add a small 'X' to disable the prefab selection
+				//hit only the spawn triggers
+				if (Physics.Raycast(MouseToRay(), out RaycastHit hit, Mathf.Infinity, mask))
+				{
+					Spawn(hit);
+				}
+				//if something "wrong" was pressed, reset the btn
+				else
+				{
+					StartCoroutine(ChangeCursor(wrongPlacementTexture));
+					isPrefabReady = false; //can add a small 'X' to disable the prefab selection
+				}
+			}
+		}
+
+		private void Spawn(RaycastHit hit)
+		{
+			OnFriendlySpawn?.Invoke(hit.point);
+		}
+
+		private IEnumerator ChangeCursor(Texture2D texture)
+		{
+			Cursor.SetCursor(texture, Vector3.zero, CursorMode.Auto);
+
+			yield return new WaitForSeconds(0.2f);
+
+			Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
+		}
+
+		//increment the fill amount based on time
+		public void ProccessFillAmount()
+		{
+			if (fillAmount >= 1)
+			{
+				btn.interactable = true;
+			}
+			else if (fillAmount < 1 && !isPrefabReady)
+			{
+				btn.interactable = false;
+				fillAmount += Time.deltaTime / spawnCoolDown;
 			}
 		}
 
 
-	}
-
-	private IEnumerator ChangeCursor(Texture2D texture)
-	{
-		Cursor.SetCursor(texture, Vector3.zero, CursorMode.Auto);
-
-		yield return new WaitForSeconds(0.2f);
-
-		Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
-	}
-
-	//increment the fill amount based on time
-	public void ProccessFillAmount()
-	{
-		if (fillAmount >= 1)
+		//get the mouse to screen ray
+		private Ray MouseToRay()
 		{
-			btn.interactable = true;
+			return Camera.main.ScreenPointToRay(Input.mousePosition);
 		}
-		else
+
+		//when the spawn is successfully complete, start the cooldwon UI
+		private void HandleSpawnComplete()
 		{
-			btn.interactable = false;
-			fillAmount += Time.deltaTime;
+			fillAmount = 0;
+			isPrefabReady = false;
 		}
 	}
 
-
-	//get the mouse to screen ray
-	private Ray MouseToRay()
-	{
-		return Camera.main.ScreenPointToRay(Input.mousePosition);
-	}
 }
+

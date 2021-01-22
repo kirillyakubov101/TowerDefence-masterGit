@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using TowerDefence.AI;
-using TowerDefence.Combat;
 using UnityEngine;
 
 public class CanonTower : MonoBehaviour

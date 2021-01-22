@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TowerDefence.Friendly;
+using UnityEngine;
 
 namespace TowerDefence.AI
 {
@@ -20,6 +21,7 @@ namespace TowerDefence.AI
 			maxHealth = health;
 		}
 
+		//from towers and projectiles
 		public void takeDamage(float damage)
 		{
 			health = Mathf.Max(health - damage,0);
@@ -32,6 +34,20 @@ namespace TowerDefence.AI
 				Destroy(this);
 			}
 
+		}
+
+		//from soldiers
+		public void takeDamageFromSoldiers(float damage,FriendlyFighter instigator)
+		{
+			health = Mathf.Max(health - damage, 0);
+
+			if (health == 0)
+			{
+				instigator.StopAttacking();
+				death.Die();
+
+				Destroy(this);
+			}
 		}
 
 		public float GetHealth()

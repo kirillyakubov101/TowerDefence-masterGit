@@ -53,6 +53,8 @@ MonoBehaviour:
     m_Bits: 34048
   damage: 50
   speed: 35
+  explosiveVFX: {fileID: 198194127032045410, guid: afa86df327539d942827a89378586060,
+    type: 3}
 --- !u!135 &4783991704279541209
 SphereCollider:
   m_ObjectHideFlags: 0

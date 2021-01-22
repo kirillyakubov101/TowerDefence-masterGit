@@ -8,11 +8,13 @@ namespace TowerDefence.Friendly
 	{
 		[SerializeField] private bool isFightingSomeone = false;
 		[SerializeField] float health = 20f;
+		[SerializeField] float damage = 15f;
 		[SerializeField] Animator animator = null;
 		[SerializeField] float range = 2f;
 		[SerializeField] LayerMask mask = new LayerMask();
 
 		[SerializeField] Fighter enemy = null;
+
 
 		private void Update()
 		{
@@ -45,8 +47,9 @@ namespace TowerDefence.Friendly
 			transform.rotation = Quaternion.LookRotation(lookDirection);
 		}
 
-		private void StopAttacking()
+		public void StopAttacking()
 		{
+			enemy = null;
 			animator.SetBool("attack", false);
 			isFightingSomeone = false;
 		}
@@ -60,6 +63,15 @@ namespace TowerDefence.Friendly
 				instigator.StopAttacking();
 				Destroy(gameObject);
 			}
+		}
+
+		//animation event
+		private void Hit()
+		{
+			if(enemy == null) { StopAttacking(); return; }
+			if(enemy.GetComponent<Health>() == null) { StopAttacking(); return; }
+			enemy.GetComponent<Health>().takeDamageFromSoldiers(damage,this);
+			
 		}
 
 		public bool GetIsFightingSomeone()

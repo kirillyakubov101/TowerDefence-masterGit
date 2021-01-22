@@ -3,101 +3,125 @@ using TowerDefence.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
+using TowerDefence.Friendly;
 
-public class SpawnMeteors : MonoBehaviour,ISpawnable
+namespace TowerDefence.UI
 {
-	[SerializeField] GameObject meteorsPrefab = null;
-	[SerializeField] LayerMask mask = new LayerMask();
-	[SerializeField] LayerMask UImask = new LayerMask();
-	
-	[SerializeField] float spawnCoolDown = 1f;
-	[SerializeField] Image image = null;
-	[SerializeField] Button btn = null;
-	[SerializeField] Vector3 spawnHightOffset = Vector3.zero;
-
-	[SerializeField] Texture2D wrongPlacementTexture = null;
-
-	float fillAmount = 1;   //the image fill amount
-	public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
-
-	//cache it for the cursor change
-	GameSession gameSession;
-
-	private void Awake()
+	public class SpawnMeteors : MonoBehaviour, ISpawnable
 	{
-		gameSession = FindObjectOfType<GameSession>();
-	}
+		[SerializeField] GameObject meteorsPrefab = null;
+		[SerializeField] LayerMask mask = new LayerMask();
+		[SerializeField] float spawnCoolDown = 1f;
+		[SerializeField] Image image = null;
+		[SerializeField] Button btn = null;
+		[SerializeField] Vector3 spawnHightOffset = Vector3.zero; 
+		[SerializeField] Texture2D wrongPlacementTexture = null;
 
-	public void AssignSpecialSkill()
-	{
-		isPrefabReady = true;
-	}
+		public static event Action<Vector3> OnMeteorSpawn; //event to notify the handler
+		public static event Action<GameObject> OnMeteorSelect; //event to notify the handler
 
-	public void ProccessFillAmount()
-	{
-		if (fillAmount >= 1)
+		float fillAmount = 1;   //the image fill amount
+		public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
+		
+
+		//cache it for the cursor change
+		GameSession gameSession;
+
+		private void OnEnable()
 		{
-			btn.interactable = true;
+			SpecialSkillsHandler.OnMeteorSpawnComplete += HandleSpawnComplete;
 		}
-		else
+		private void OnDisable()
 		{
-			btn.interactable = false;
-			fillAmount += Time.deltaTime;
+			SpecialSkillsHandler.OnMeteorSpawnComplete -= HandleSpawnComplete;
 		}
-	}
 
-	public void ProccessSpawn()
-	{
-		//check if CoolDown HAS PASSED
-		ProccessFillAmount();
-
-		//left mouse click
-		if (Input.GetMouseButtonDown(0) && btn.interactable && isPrefabReady)
+		private void Awake()
 		{
-			//avoid raycast through buttons
-			if(EventSystem.current.IsPointerOverGameObject())
+			gameSession = FindObjectOfType<GameSession>();
+		}
+
+		public void AssignSpecialSkill()
+		{
+			OnMeteorSelect?.Invoke(meteorsPrefab);
+			isPrefabReady = true;
+		}
+
+		public void ProccessFillAmount()
+		{
+			if (fillAmount >= 1)
 			{
-				return;
+				btn.interactable = true;
 			}
+			else if(fillAmount < 1 && !isPrefabReady)
+			{
+				btn.interactable = false;
+				fillAmount += Time.deltaTime/spawnCoolDown;
+			}
+		}
+
+		public void ProccessSpawn()
+		{
+			//check if CoolDown HAS PASSED
+			ProccessFillAmount();
+
+			//left mouse click
+			if (Input.GetMouseButtonDown(0) && btn.interactable && isPrefabReady)
+			{
+				//avoid raycast through buttons
+				if (EventSystem.current.IsPointerOverGameObject())
+				{
+					return;
+				}
 				//hit only the spawn triggers
-			if (Physics.Raycast(MouseToRay(), out RaycastHit hit, Mathf.Infinity, mask))
-			{
-				GameObject meteorsInstace = Instantiate(meteorsPrefab, hit.point + spawnHightOffset, Quaternion.identity);
-				Destroy(meteorsInstace, 4f);
+				if (Physics.Raycast(MouseToRay(), out RaycastHit hit, Mathf.Infinity, mask))
+				{
+					Spawn(hit);
 
-				//reset the fill and make the prefab "NOT" ready again to make the user click again
-				fillAmount = 0;
-				isPrefabReady = false;
+				}
+				//if something "wrong" was pressed, reset the btn
+				else
+				{
+					StartCoroutine(ChangeCursor(wrongPlacementTexture));
+					isPrefabReady = false;
+				}
+			}
 
-			}
-			//if something "wrong" was pressed, reset the btn
-			else
-			{
-				StartCoroutine(ChangeCursor(wrongPlacementTexture));
-				isPrefabReady = false;
-			}
 		}
 
-	}
+		private void Spawn(RaycastHit hit)
+		{
+			OnMeteorSpawn?.Invoke(hit.point);
+		}
 
-	//get the mouse to screen ray
-	private Ray MouseToRay()
-	{
-		return Camera.main.ScreenPointToRay(Input.mousePosition);
-	}
+		//get the mouse to screen ray
+		private Ray MouseToRay()
+		{
+			return Camera.main.ScreenPointToRay(Input.mousePosition);
+		}
 
-	private void Update()
-	{
-		ProccessSpawn();
-		image.fillAmount = fillAmount;
-	}
+		private void Update()
+		{
+			ProccessSpawn();
+			image.fillAmount = fillAmount;
+		}
 
-	private IEnumerator ChangeCursor(Texture2D texture)
-	{
-		Cursor.SetCursor(texture, Vector3.zero, CursorMode.Auto);
+		private IEnumerator ChangeCursor(Texture2D texture)
+		{
+			Cursor.SetCursor(texture, Vector3.zero, CursorMode.Auto);
 
-		yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSeconds(0.2f);
 
-		Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
+			Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
+		}
+
+		private void HandleSpawnComplete()
+		{
+			fillAmount = 0;
+			isPrefabReady = false;
+		}
 	}
 }
+
+

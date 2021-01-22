@@ -1578,7 +1578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b2f567d67a94e49b2fe69431459a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friendlyPrefab: {fileID: 6755708183729282736, guid: 1720540268cd54948b383e3244dccbad,
+  friendlyPrefab: {fileID: 91354828467130507, guid: 227d6dccf64556b44839ed32868fe0c7,
     type: 3}
   mask:
     serializedVersion: 2
@@ -2852,6 +2852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2447697362954447620}
   - component: {fileID: 7819188927636992318}
+  - component: {fileID: 3480760153022213699}
   m_Layer: 5
   m_Name: Container For Special Abilities
   m_TagString: Untagged
@@ -2888,6 +2889,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363040545592652330}
   m_CullTransparentMesh: 0
+--- !u!114 &3480760153022213699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363040545592652330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19bb3685fff55cb46b42a83f6ec0edbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allActiveSkills:
+  - {fileID: 91354828467130507, guid: 227d6dccf64556b44839ed32868fe0c7, type: 3}
+  - {fileID: 3309477122180493160, guid: 110cab9eceb7cd64ba21c1797f8a6b32, type: 3}
 --- !u!1 &7587423454551953049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3678,9 +3694,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 32768
-  UImask:
-    serializedVersion: 2
-    m_Bits: 32
   spawnCoolDown: 2
   image: {fileID: 2948869324987660590}
   btn: {fileID: 2992901847248617080}
