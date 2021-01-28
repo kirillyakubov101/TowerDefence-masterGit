@@ -15,7 +15,6 @@ namespace TowerDefence.UI
 		[SerializeField] float spawnCoolDown = 1f;
 		[SerializeField] Image image = null;
 		[SerializeField] Button btn = null;
-		[SerializeField] Vector3 spawnHightOffset = Vector3.zero; 
 		[SerializeField] Texture2D wrongPlacementTexture = null;
 
 		public static event Action<Vector3> OnMeteorSpawn; //event to notify the handler
@@ -23,10 +22,15 @@ namespace TowerDefence.UI
 
 		float fillAmount = 1;   //the image fill amount
 		public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
-		
 
-		//cache it for the cursor change
+		//chache
 		GameSession gameSession;
+
+		private void Awake()
+		{
+			gameSession = FindObjectOfType<GameSession>();
+		}
+
 
 		private void OnEnable()
 		{
@@ -37,10 +41,6 @@ namespace TowerDefence.UI
 			SpecialSkillsHandler.OnMeteorSpawnComplete -= HandleSpawnComplete;
 		}
 
-		private void Awake()
-		{
-			gameSession = FindObjectOfType<GameSession>();
-		}
 
 		public void AssignSpecialSkill()
 		{
@@ -113,7 +113,7 @@ namespace TowerDefence.UI
 
 			yield return new WaitForSeconds(0.2f);
 
-			Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
+			Cursor.SetCursor(gameSession.GetDefaultCursorTexture(), Vector3.zero, CursorMode.Auto);
 		}
 
 		private void HandleSpawnComplete()

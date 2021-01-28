@@ -6,6 +6,7 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
 	[SerializeField] private GameObject MenuContainer = null;
+	[SerializeField] private GameObject optionWindow = null;
 	[SerializeField] private GameObject menuIcon = null;
 	[SerializeField] private GameObject WinGameImage = null;
 	[SerializeField] private GameObject LoseGameImage = null;

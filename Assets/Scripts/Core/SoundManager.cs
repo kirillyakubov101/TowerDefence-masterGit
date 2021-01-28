@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TowerDefence.AI;
 using TowerDefence.Towers;
@@ -10,6 +11,7 @@ public class SoundManager : MonoBehaviour
 	[SerializeField] AudioSource audioSourceFireball = null;
 	[SerializeField] AudioSource audioSourceCoins = null;
 	[SerializeField] AudioSource audioSourceCannonBallLaunch = null;
+	[SerializeField] AudioSource audioSourceArrowLaunch = null;
 
 
 
@@ -19,7 +21,10 @@ public class SoundManager : MonoBehaviour
 		MageTower.onFireBallLaunch += HandleFireBallLaunchSound;
 		Death.onCoinGained += HandleCoinsGainedSound;
 		CanonTower.onCannonBallLaunch += HandleCannonBallLaunch;
+		TowerArcher.onArrowLaunch += HandleArrowLaunch;
 	}
+
+	
 
 	private void OnDisable()
 	{
@@ -27,6 +32,7 @@ public class SoundManager : MonoBehaviour
 		MageTower.onFireBallLaunch -= HandleFireBallLaunchSound;
 		Death.onCoinGained -= HandleCoinsGainedSound;
 		CanonTower.onCannonBallLaunch -= HandleCannonBallLaunch;
+		TowerArcher.onArrowLaunch -= HandleArrowLaunch;
 	}
 
 	private void HandleExplosionHitSound()
@@ -47,5 +53,10 @@ public class SoundManager : MonoBehaviour
 	private void HandleCannonBallLaunch()
 	{
 		audioSourceCannonBallLaunch.Play();
+	}
+
+	private void HandleArrowLaunch()
+	{
+		audioSourceArrowLaunch.Play();
 	}
 }

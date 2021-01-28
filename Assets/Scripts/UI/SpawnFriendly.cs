@@ -23,8 +23,13 @@ namespace TowerDefence.UI
 		float fillAmount = 1;   //the image fill amount
 		public bool isPrefabReady = false;  //if the soldier/btn was selected and ready to spawn
 
-		//cache it for the cursor change
+		//chache
 		GameSession gameSession;
+
+		private void Awake()
+		{
+			gameSession = FindObjectOfType<GameSession>();
+		}
 
 		private void OnEnable()
 		{
@@ -34,11 +39,6 @@ namespace TowerDefence.UI
 		private void OnDisable()
 		{
 			SpecialSkillsHandler.OnFriendlySpawnComplete -= HandleSpawnComplete;
-		}
-
-		private void Awake()
-		{
-			gameSession = FindObjectOfType<GameSession>();
 		}
 
 		private void Update()
@@ -95,7 +95,7 @@ namespace TowerDefence.UI
 
 			yield return new WaitForSeconds(0.2f);
 
-			Cursor.SetCursor(gameSession.defaultCursor, Vector3.zero, CursorMode.Auto);
+			Cursor.SetCursor(gameSession.GetDefaultCursorTexture(), Vector3.zero, CursorMode.Auto);
 		}
 
 		//increment the fill amount based on time

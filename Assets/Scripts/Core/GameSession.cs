@@ -6,7 +6,7 @@ namespace TowerDefence.Core
 {
 	public class GameSession : MonoBehaviour
 	{
-		public Texture2D defaultCursor = null;
+		[SerializeField] Texture2D defaultCursor;
 
 		private void Start()
 		{
@@ -39,6 +39,11 @@ namespace TowerDefence.Core
 		private Ray mouseRay()
 		{
 			return Camera.main.ScreenPointToRay(Input.mousePosition);
+		}
+
+		public Texture2D GetDefaultCursorTexture()
+		{
+			return defaultCursor;
 		}
 	}
 }

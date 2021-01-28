@@ -1,4 +1,5 @@
-﻿using TowerDefence.AI;
+﻿using System;
+using TowerDefence.AI;
 using TowerDefence.Combat;
 using UnityEngine;
 
@@ -11,11 +12,14 @@ namespace TowerDefence.Towers
 		[SerializeField] Projectile arrow;  //FIX AND MAKE A NORMAL SCRIPT
 		[SerializeField] float damage = 10f;
 		[SerializeField] LayerMask mask;
-  
+
+		public static event Action onArrowLaunch;
+
 		Health enemy; 
 		Animator animator;
-
 		Quaternion rotatationStart;
+
+
 		private void Awake()
 		{
 			animator = GetComponent<Animator>();
@@ -64,6 +68,7 @@ namespace TowerDefence.Towers
 		private void Hit()
 		{
 			if (enemy == null) { StopShooting(); return; }
+			onArrowLaunch?.Invoke(); //sound 
 			var newArrow = Instantiate(arrow, bowPos.position, Quaternion.identity); 
 			newArrow.AssignTarget(enemy, damage);
 
