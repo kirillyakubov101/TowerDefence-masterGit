@@ -15,6 +15,7 @@ namespace TowerDefence.Friendly
 
 		[SerializeField] Fighter enemy = null;
 
+		public event Action OnDeath; //death event for the parent to self destroy
 
 		private void Update()
 		{
@@ -61,6 +62,7 @@ namespace TowerDefence.Friendly
 			if (health <= 0f)
 			{
 				instigator.StopAttacking();
+				OnDeath?.Invoke(); //event for the parent
 				Destroy(gameObject);
 			}
 		}
