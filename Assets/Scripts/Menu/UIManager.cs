@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour
 		
 		yield return new WaitForSeconds(startGameDelayTime);
 		Time.timeScale = 1f;
-		//SceneManager.LoadScene(1); //change to "NOT A MAGIC NUMBER"
 		FindObjectOfType<Fader>().FadeInAction();
 		StartCoroutine(NextLevel());
 	}
@@ -50,7 +49,8 @@ public class UIManager : MonoBehaviour
 	{
 		int currentIndex = SceneManager.GetActiveScene().buildIndex;
 		SceneManager.LoadSceneAsync(currentIndex);
-		
+
+
 	}
 
 	public void LoadNextLevel()

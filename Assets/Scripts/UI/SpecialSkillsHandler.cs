@@ -14,6 +14,9 @@ namespace TowerDefence.Friendly
 		public static event Action OnFriendlySpawnComplete;
 		public static event Action OnMeteorSpawnComplete;
 
+		//sound events triggers
+		public static event Action OnMeteorLaunch;
+
 		public GameObject GetaAtiveSkillPrefab()
 		{
 			return activeSkillPrefab;
@@ -53,10 +56,12 @@ namespace TowerDefence.Friendly
 		private void HandleMeteorSpawn(Vector3 hit)
 		{
 			if (allActiveSkills[1] != activeSkillPrefab) { return; }
+
 			Vector3 spawnHightOffset = new Vector3(0, 50, 0); //remove later and show in inspector
 			GameObject meteorsInstace = Instantiate(activeSkillPrefab, hit + spawnHightOffset, Quaternion.identity);
 			Destroy(meteorsInstace, 4f);
-
+			//sound event
+			OnMeteorLaunch?.Invoke();
 			OnMeteorSpawnComplete?.Invoke();
 		}
 	}
