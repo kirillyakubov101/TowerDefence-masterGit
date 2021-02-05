@@ -8,7 +8,6 @@ namespace TowerDefence.Towers
 	public class TeslaTower : MonoBehaviour
 	{
 		[SerializeField] LayerMask mask;
-		[SerializeField] Health enemy; //remove the serialize
 		[SerializeField] float range = 5f;
 		[SerializeField] List<Health> enemiesNearBy = null;
 		[SerializeField] float towerDamage = 50f;
@@ -17,6 +16,7 @@ namespace TowerDefence.Towers
 
 		//Cache
 		LineRenderer laser;
+		Health enemy; 
 
 		private void Awake()
 		{

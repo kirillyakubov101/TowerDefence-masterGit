@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
 	[SerializeField] AudioSource audioSourceCannonBallLaunch = null;
 	[SerializeField] AudioSource audioSourceArrowLaunch = null;
 	[SerializeField] AudioSource audioSourceMeteorLaunch = null;
+	[SerializeField] AudioSource audioSourceTowerShow = null;
 
 	//Announcer
 	[Header("Announcer-Win")]
@@ -44,6 +45,7 @@ public class SoundManager : MonoBehaviour
 		CanonTower.onCannonBallLaunch += HandleCannonBallLaunch;
 		TowerArcher.onArrowLaunch += HandleArrowLaunch;
 		SpecialSkillsHandler.OnMeteorLaunch += HandleMeteorLaunch;
+		Tower.OnTowerUp += HandleTowerShow;
 
 		//Announcer
 		LevelController.WonGame += HandleWonGameSound;
@@ -59,7 +61,8 @@ public class SoundManager : MonoBehaviour
 		Death.onCoinGained -= HandleCoinsGainedSound;
 		CanonTower.onCannonBallLaunch -= HandleCannonBallLaunch;
 		TowerArcher.onArrowLaunch -= HandleArrowLaunch;
-		SpecialSkillsHandler.OnMeteorLaunch += HandleMeteorLaunch;
+		SpecialSkillsHandler.OnMeteorLaunch -= HandleMeteorLaunch;
+		Tower.OnTowerUp -= HandleTowerShow;
 
 		LevelController.WonGame -= HandleWonGameSound;
 		LevelController.LostGame -= HandleLoseGameSound;
@@ -92,8 +95,12 @@ public class SoundManager : MonoBehaviour
 
 	private void HandleMeteorLaunch()
 	{
-		if(audioSourceMeteorLaunch == null) { return;}
 		audioSourceMeteorLaunch.Play();
+	}
+
+	private void HandleTowerShow()
+	{
+		audioSourceTowerShow.Play();
 	}
 
 	private void HandleWonGameSound()

@@ -3508,7 +3508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MenuContainer: {fileID: 3383385639496423987}
-  optionWindow: {fileID: 0}
   menuIcon: {fileID: 2640334796042339713}
   WinGameImage: {fileID: 3043020073373965726}
   LoseGameImage: {fileID: 2910275022809092896}
@@ -3988,7 +3987,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 32768
-  spawnCoolDown: 2
+  spawnCoolDown: 10
   image: {fileID: 2948869324987660590}
   btn: {fileID: 2992901847248617080}
   wrongPlacementTexture: {fileID: 2800000, guid: 21628736160fcc9488493401da3ef621,
