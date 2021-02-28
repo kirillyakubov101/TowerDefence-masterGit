@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Enemy Wave Config")]
 public class WaveConfig : ScriptableObject
 {
-	[SerializeField] GameObject enemyPrefab;
+	[SerializeField] GameObject enemyPrefab = null;
 	[SerializeField] int numberOfEnemies;
 	[SerializeField] float timeBetweenSpawns;
 	

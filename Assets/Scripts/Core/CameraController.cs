@@ -5,10 +5,10 @@ namespace TowerDefence.Core
 	public class CameraController : MonoBehaviour
 	{
 		//[SerializeField] float clampRadius = 12f;
-		[SerializeField] float minZoomDis;
-		[SerializeField] float maxZoomDis;
-		[SerializeField] float moveSpeed;
-		[SerializeField] float zoomSpeed;
+		[SerializeField] float minZoomDis = 0f;
+		[SerializeField] float maxZoomDis = 0f;
+		[SerializeField] float moveSpeed = 0f;
+		[SerializeField] float zoomSpeed = 0f;
 		//Borders
 		[SerializeField] Transform screenTopYBorder = null;
 		[SerializeField] Transform screenBotYBorder = null;

@@ -9,7 +9,7 @@ namespace TowerDefence.UI
 	public class BuildUi : MonoBehaviour
 	{
 		[SerializeField] GameObject buildingTowersContainer;
-		[SerializeField] GameObject flag;
+		[SerializeField] GameObject flag = null;
 
 		private void Start()
 		{

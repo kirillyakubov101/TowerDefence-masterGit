@@ -1,23 +1,23 @@
 ﻿using System;
 using TowerDefence.AI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CanonTower : MonoBehaviour
 {
 	[SerializeField] float range;
-	[SerializeField] Transform ball;  //FIX AND MAKE A NORMAL SCRIPT
+	[SerializeField] Transform ball;
 	[SerializeField] float damage = 100f;
-	[SerializeField] LayerMask mask;
-	[SerializeField] Health enemy; // //remove the serialize
-	[SerializeField] Transform shootPoint;
+	[SerializeField] LayerMask mask = new LayerMask();
+	[SerializeField] Transform shootPoint = null;
 	[SerializeField] float delayMax = 5f;
 	[SerializeField] ParticleSystem smokeEffect = null;
+	[SerializeField] UnityEvent onCannonShot = null;
 
 	float shootDelay = 0f;
+	Health enemy = null;
 
 	//U - initial velocity, V- final velocity
-
-	public static event Action onCannonBallLaunch;
 
 	private void Update()
 	{
@@ -85,7 +85,7 @@ public class CanonTower : MonoBehaviour
 		newProjectile.GetComponent<CanonBomb>().AssignTarget(enemy.transform,damage);
 
 		//sound event 
-		onCannonBallLaunch?.Invoke();
+		onCannonShot?.Invoke();
 
 		Instantiate(smokeEffect, shootPoint.position, Quaternion.identity);
 

@@ -8,8 +8,8 @@ namespace TowerDefence.Core
 	{
 		[SerializeField] int lives = 20;
 		[SerializeField] int gold = 200;
-		[SerializeField] Text goldPoints;
-		[SerializeField] Text lifePoints;
+		[SerializeField] Text goldPoints = null;
+		[SerializeField] Text lifePoints = null;
 
 		bool isGameOver = false;
 

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using TowerDefence.AI;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class CanonBomb : MonoBehaviour
 {
@@ -11,12 +9,14 @@ public class CanonBomb : MonoBehaviour
 	[SerializeField] Transform target;
 	[SerializeField] float damage = 50f; //this needs to be on the tower
 	[SerializeField] float range = 5f;
-	[SerializeField] LayerMask mask;
-	[SerializeField] ParticleSystem explosiveVFX;
+	[SerializeField] LayerMask mask = new LayerMask();
+	[SerializeField] ParticleSystem explosiveVFX = null;
+	[SerializeField] UnityEvent onCannonHit = null;
+
 	float gravity;
 	Rigidbody rb;
+	bool isHit = false;
 
-	public static event Action onExplosion;
 
 	private void Awake()
 	{
@@ -55,6 +55,8 @@ public class CanonBomb : MonoBehaviour
 	{
 		if(other.tag =="Tower") { return; }
 
+		if (isHit) { return; }
+
 		Instantiate(
 			explosiveVFX, new Vector3(transform.position.x,
 			transform.position.y + 2f,
@@ -62,8 +64,11 @@ public class CanonBomb : MonoBehaviour
 			Quaternion.identity
 			);
 
-		//event for the sound system
-		onExplosion?.Invoke();
+		//events for the sound system
+		onCannonHit?.Invoke();
+
+
+		isHit = true;
 
 		var hits = Physics.OverlapSphere(transform.position, range, mask);
 
@@ -78,7 +83,7 @@ public class CanonBomb : MonoBehaviour
 
 			
 
-		Destroy(gameObject);
+		Destroy(gameObject,2f);
 		
 	}
 }

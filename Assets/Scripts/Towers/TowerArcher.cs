@@ -2,18 +2,19 @@
 using TowerDefence.AI;
 using TowerDefence.Combat;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TowerDefence.Towers
 {
 	public class TowerArcher : MonoBehaviour
 	{
-		[SerializeField] float range;
+		[SerializeField] float range = 0f;
 		[SerializeField] Transform bowPos;
-		[SerializeField] Projectile arrow;  //FIX AND MAKE A NORMAL SCRIPT
+		[SerializeField] Projectile arrow; 
 		[SerializeField] float damage = 10f;
 		[SerializeField] LayerMask mask;
+		[SerializeField] UnityEvent onArrowLaunch = null;
 
-		public static event Action onArrowLaunch;
 
 		Health enemy; 
 		Animator animator;
@@ -58,17 +59,20 @@ namespace TowerDefence.Towers
 			}
 		}
 
-		private void OnDrawGizmos()
-		{
-			Gizmos.color = Color.yellow;
-			Gizmos.DrawWireSphere(transform.position, range);
-		}
+		//private void OnDrawGizmos()
+		//{
+		//	Gizmos.color = Color.yellow;
+		//	Gizmos.DrawWireSphere(transform.position, range);
+		//}
 
 		//Animation Event
 		private void Hit()
 		{
 			if (enemy == null) { StopShooting(); return; }
-			onArrowLaunch?.Invoke(); //sound 
+
+			//sound event
+			onArrowLaunch?.Invoke();
+
 			var newArrow = Instantiate(arrow, bowPos.position, Quaternion.identity); 
 			newArrow.AssignTarget(enemy, damage);
 

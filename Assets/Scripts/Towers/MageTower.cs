@@ -4,34 +4,28 @@ using System.Collections.Generic;
 using TowerDefence.AI;
 using TowerDefence.Combat;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TowerDefence.Towers
 {
 	public class MageTower : MonoBehaviour
 	{
-		[SerializeField] float range;
+		[SerializeField] float range = 0f;
 		[SerializeField] Transform stuffPosition = null;
 		[SerializeField] Projectile fireBall = null;
 		[SerializeField] float damage = 25f;
 		[SerializeField] LayerMask mask = new LayerMask();
-		[SerializeField] AudioSource audioSource = null;
-
-		public static event Action onFireBallLaunch;
+		[SerializeField] UnityEvent onFireBallCast = null;
 
 		Health enemy;
 		Animator animator;
 
-		Quaternion rotatationStart;
 		private void Awake()
 		{
 			animator = GetComponent<Animator>();
 		}
 
-		// Start is called before the first frame update
-		void Start()
-		{
-			transform.rotation = rotatationStart;
-		}
+		
 
 		// Update is called once per frame
 		void Update()
@@ -76,7 +70,7 @@ namespace TowerDefence.Towers
 			newArrow.AssignTarget(enemy, damage);
 
 			//For the Sound System
-			onFireBallLaunch?.Invoke();
+			onFireBallCast?.Invoke();
 
 		}
 

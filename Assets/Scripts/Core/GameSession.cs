@@ -6,7 +6,7 @@ namespace TowerDefence.Core
 {
 	public class GameSession : MonoBehaviour
 	{
-		[SerializeField] Texture2D defaultCursor;
+		[SerializeField] Texture2D defaultCursor = null;
 
 		private void Start()
 		{

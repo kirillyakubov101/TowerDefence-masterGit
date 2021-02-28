@@ -7,7 +7,7 @@ namespace TowerDefence.Core
 {
 	public class EnemySpawner : MonoBehaviour
 	{
-		[SerializeField] List<WaveConfig> waves;
+		[SerializeField] List<WaveConfig> waves = null;
 		[SerializeField] Transform target;
 
 		private int numberOfEnemies;

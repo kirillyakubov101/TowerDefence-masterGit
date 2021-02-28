@@ -7,7 +7,7 @@ namespace TowerDefence.Towers
 {
 	public class TeslaTower : MonoBehaviour
 	{
-		[SerializeField] LayerMask mask;
+		[SerializeField] LayerMask mask = new LayerMask();
 		[SerializeField] float range = 5f;
 		[SerializeField] List<Health> enemiesNearBy = null;
 		[SerializeField] float towerDamage = 50f;

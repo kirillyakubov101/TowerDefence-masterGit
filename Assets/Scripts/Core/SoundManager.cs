@@ -7,11 +7,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-	[SerializeField] AudioSource audioSourceCannonExplosion = null;
-	[SerializeField] AudioSource audioSourceFireball = null;
 	[SerializeField] AudioSource audioSourceCoins = null;
-	[SerializeField] AudioSource audioSourceCannonBallLaunch = null;
-	[SerializeField] AudioSource audioSourceArrowLaunch = null;
 	[SerializeField] AudioSource audioSourceMeteorLaunch = null;
 	[SerializeField] AudioSource audioSourceTowerShow = null;
 
@@ -39,11 +35,7 @@ public class SoundManager : MonoBehaviour
 
 	private void OnEnable()
 	{
-		CanonBomb.onExplosion += HandleExplosionHitSound;
-		MageTower.onFireBallLaunch += HandleFireBallLaunchSound;
 		Death.onCoinGained += HandleCoinsGainedSound;
-		CanonTower.onCannonBallLaunch += HandleCannonBallLaunch;
-		TowerArcher.onArrowLaunch += HandleArrowLaunch;
 		SpecialSkillsHandler.OnMeteorLaunch += HandleMeteorLaunch;
 		Tower.OnTowerUp += HandleTowerShow;
 
@@ -56,11 +48,7 @@ public class SoundManager : MonoBehaviour
 
 	private void OnDisable()
 	{
-		CanonBomb.onExplosion -= HandleExplosionHitSound;
-		MageTower.onFireBallLaunch -= HandleFireBallLaunchSound;
 		Death.onCoinGained -= HandleCoinsGainedSound;
-		CanonTower.onCannonBallLaunch -= HandleCannonBallLaunch;
-		TowerArcher.onArrowLaunch -= HandleArrowLaunch;
 		SpecialSkillsHandler.OnMeteorLaunch -= HandleMeteorLaunch;
 		Tower.OnTowerUp -= HandleTowerShow;
 
@@ -68,29 +56,9 @@ public class SoundManager : MonoBehaviour
 		LevelController.LostGame -= HandleLoseGameSound;
 	}
 
-	private void HandleExplosionHitSound()
-	{
-		audioSourceCannonExplosion.Play();
-	}
-
-	private void HandleFireBallLaunchSound()
-	{
-		audioSourceFireball.Play();
-	}
-
 	private void HandleCoinsGainedSound()
 	{
 		audioSourceCoins.Play();
-	}
-
-	private void HandleCannonBallLaunch()
-	{
-		audioSourceCannonBallLaunch.Play();
-	}
-
-	private void HandleArrowLaunch()
-	{
-		audioSourceArrowLaunch.Play();
 	}
 
 	private void HandleMeteorLaunch()

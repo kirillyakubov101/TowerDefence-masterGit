@@ -23,14 +23,12 @@ namespace TowerDefence.Towers
 		[Header("UI")]
 		[SerializeField] BuildUi buildUI = null;
 		[SerializeField] Animator animator = null;
-		[Header("Flag")]
-		[SerializeField] Renderer flagMat = null;
 		[Header("Smoke Particle Effect")]
 		[SerializeField] Transform smokePartcileTransform = null;
 		[SerializeField] ParticleSystem smokeParticleEffect = null;
 
 		LevelController levelController;
-		Color flagColor;
+		
 
 		//vars
 		int ArcherTowerPrice;
@@ -47,18 +45,8 @@ namespace TowerDefence.Towers
 		private void Start()
 		{
 			InitializeTowerPrices();
-			flagColor = new Color(248f, 41f, 31f);
 		}
 
-		private void OnMouseOver()
-		{
-			flagMat.material.SetColor("_EmissionColor", flagColor * 0.1f);
-		}
-
-		private void OnMouseExit()
-		{
-			flagMat.material.SetColor("_EmissionColor", flagColor * 0);
-		}
 
 		private void OnMouseUpAsButton() //Make tower
 		{
@@ -77,7 +65,7 @@ namespace TowerDefence.Towers
 				archerTowerPos.position = AdjustNewTowerPosition(archerTowerPos);
 				levelController.PayForTower(ArcherTowerPrice);
 				Instantiate(archerTower, archerTowerPos.position, transform.rotation);
-				SmokeTrainAfterBuild();
+				SmokeTrail();
 				SelfDestroyPaltform();
 			}
 		}
@@ -89,7 +77,7 @@ namespace TowerDefence.Towers
 				teslaTowerPos.position = AdjustNewTowerPosition(teslaTowerPos);
 				levelController.PayForTower(TeslaTowerPrice);
 				Instantiate(teslaTower, teslaTowerPos.position, transform.rotation);
-				SmokeTrainAfterBuild();
+				SmokeTrail();
 				SelfDestroyPaltform();
 			}
 		}
@@ -101,7 +89,7 @@ namespace TowerDefence.Towers
 				cannonTowerPos.position = AdjustNewTowerPosition(cannonTowerPos);
 				levelController.PayForTower(CannonTowerPrice);
 				Instantiate(cannonTower, cannonTowerPos.position, transform.rotation);
-				SmokeTrainAfterBuild();
+				SmokeTrail();
 				SelfDestroyPaltform();
 			}
 		}
@@ -113,7 +101,7 @@ namespace TowerDefence.Towers
 				mageTowerPos.position = AdjustNewTowerPosition(mageTowerPos);
 				levelController.PayForTower(mageTowerPrice);
 				Instantiate(mageTower, mageTowerPos.position, transform.rotation);
-				SmokeTrainAfterBuild();
+				SmokeTrail();
 				SelfDestroyPaltform();
 			}
 		}
@@ -139,7 +127,7 @@ namespace TowerDefence.Towers
 			return towerPos.position;
 		}
 
-		private void SmokeTrainAfterBuild()
+		private void SmokeTrail()
 		{
 			Instantiate(smokeParticleEffect, smokePartcileTransform.position, smokePartcileTransform.rotation);
 		}
