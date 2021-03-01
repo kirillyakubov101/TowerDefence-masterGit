@@ -3,9 +3,10 @@ using UnityEngine.AI;
 
 namespace TowerDefence.AI
 {
+	
+
 	public class AiController : MonoBehaviour
 	{
-
 		NavMeshAgent meshAgent;
 		Transform goalTransform = null;
 

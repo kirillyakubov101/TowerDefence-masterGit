@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3903798058693784095}
   - component: {fileID: 3756763846848709141}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: Runner
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d574e5343ee7e4b9d37c5a126640e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 1
 --- !u!136 &222177925350376606
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4636c5c8e92d67d44ac266d621eade7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  statsConfig: {fileID: 11400000, guid: 858a31018516b1047b188e097f7f2d85, type: 2}
 --- !u!54 &4163449642117739274
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,12 +164,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905a736cfd3bc634c9a22ab74bfc757e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsConfig: {fileID: 11400000, guid: 858a31018516b1047b188e097f7f2d85, type: 2}
   searchRange: 5
   mask:
     serializedVersion: 2
     m_Bits: 16384
-  damage: 10
-  enemy: {fileID: 0}
+  damage: 0
 --- !u!1001 &1764010263919761537
 PrefabInstance:
   m_ObjectHideFlags: 0

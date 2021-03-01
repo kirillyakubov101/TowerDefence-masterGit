@@ -62,8 +62,6 @@ namespace TowerDefence.Towers
 			else
 			{
 				StopShooting();
-
-
 			}
 		}
 

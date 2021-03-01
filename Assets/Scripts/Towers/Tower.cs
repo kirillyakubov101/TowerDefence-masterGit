@@ -8,7 +8,9 @@ namespace TowerDefence.Towers
 		[SerializeField] float baseSpawnLevel = -0.2f;
 		[SerializeField] float spawnSpeed = 2f;
 
-		static public event Action OnTowerUp;
+		public float BaseSpawnLevel { get => baseSpawnLevel; set => baseSpawnLevel = value; }
+
+		static public event Action OnTowerUp; //change this to spartial volume event
 
 		private void Start()
 		{
@@ -16,6 +18,8 @@ namespace TowerDefence.Towers
 		}
 
 		bool isTowerShowed = false;
+
+		
 
 		private void Update()
 		{

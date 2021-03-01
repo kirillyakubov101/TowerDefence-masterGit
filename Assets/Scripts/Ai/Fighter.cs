@@ -1,30 +1,35 @@
 ﻿using UnityEngine;
 using TowerDefence.Friendly;
+using TowerDefence.Statistics;
 
 namespace TowerDefence.AI
 {
 	public class Fighter : MonoBehaviour
 	{
+		[SerializeField] StatsConfig statsConfig = null;
 		[SerializeField] float searchRange = 5f;
 		[SerializeField] LayerMask mask = new LayerMask();
-		[SerializeField] float damage = 10f;
+		
 
 		Animator animator;
 		AiController aiController;
-		
+		public float damage;
+		FriendlyFighter enemy = null;
+		Transform originalPath = null;
 
-		[SerializeField] FriendlyFighter enemy = null;
-		private Transform originalPath = null;
+		
 
 		private void Awake()
 		{
 			animator = GetComponent<Animator>();
 			aiController = GetComponent<AiController>();
+			
 		}
 
 		private void Start()
 		{
 			originalPath = aiController.GetOriginalPath();
+			damage = statsConfig.Damage;
 		}
 
 
@@ -81,7 +86,7 @@ namespace TowerDefence.AI
 		{
 			if(enemy == null) { StopAttacking(); return; }
 
-			enemy.TakeDamage(damage,this);
+			enemy.TakeDamage(Damage,this);
 		}
 
 		public void StopAttacking()
@@ -104,6 +109,8 @@ namespace TowerDefence.AI
 			lookDirection.y = 0;
 			transform.rotation = Quaternion.LookRotation(lookDirection);
 		}
+
+		public float Damage { get => damage; }
 	}
 }
 

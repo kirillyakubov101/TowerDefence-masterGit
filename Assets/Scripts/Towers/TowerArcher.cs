@@ -18,7 +18,7 @@ namespace TowerDefence.Towers
 
 		Health enemy; 
 		Animator animator;
-		Quaternion rotatationStart;
+		
 
 
 		private void Awake()
@@ -26,11 +26,6 @@ namespace TowerDefence.Towers
 			animator = GetComponent<Animator>();
 		}
 
-		// Start is called before the first frame update
-		void Start()
-		{
-			transform.rotation = rotatationStart;
-		}
 
 		// Update is called once per frame
 		void Update()

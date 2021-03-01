@@ -26,6 +26,7 @@ namespace TowerDefence.Towers
 		[Header("Smoke Particle Effect")]
 		[SerializeField] Transform smokePartcileTransform = null;
 		[SerializeField] ParticleSystem smokeParticleEffect = null;
+		[SerializeField] float baseSpawnLevelParam = 2f;
 
 		LevelController levelController;
 		
@@ -45,6 +46,7 @@ namespace TowerDefence.Towers
 		private void Start()
 		{
 			InitializeTowerPrices();
+			
 		}
 
 
@@ -64,7 +66,8 @@ namespace TowerDefence.Towers
 			{
 				archerTowerPos.position = AdjustNewTowerPosition(archerTowerPos);
 				levelController.PayForTower(ArcherTowerPrice);
-				Instantiate(archerTower, archerTowerPos.position, transform.rotation);
+				Tower newTower = Instantiate(archerTower, archerTowerPos.position, transform.rotation);
+				newTower.BaseSpawnLevel = baseSpawnLevelParam;
 				SmokeTrail();
 				SelfDestroyPaltform();
 			}

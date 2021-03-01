@@ -1,15 +1,18 @@
 ﻿using TowerDefence.Friendly;
 using UnityEngine;
+using TowerDefence.Statistics;
 
 namespace TowerDefence.AI
 {
 	public class Health : MonoBehaviour
 	{
-		[SerializeField] float health = 100f;
+		[SerializeField] StatsConfig statsConfig = null;
 
+		float health;
 		float maxHealth;
-
 		Death death;
+
+		
 
 		private void Awake()
 		{
@@ -18,6 +21,7 @@ namespace TowerDefence.AI
 
 		private void Start()
 		{
+			health = statsConfig.Health;
 			maxHealth = health;
 		}
 
@@ -59,5 +63,7 @@ namespace TowerDefence.AI
 		{
 			return maxHealth;
 		}
+
+		public StatsConfig StatsConfig { get => statsConfig;  }
 	}
 }
