@@ -39,7 +39,7 @@ namespace TowerDefence.Core
 				{
 					//stats
 					currentStat = hit.collider.GetComponent<Health>().StatsConfig; //get the stat from the health comp
-					card.DisplayStats(currentStat.Health,currentStat.Damage, currentStat.Name);
+					card.DisplayStats(currentStat.Health,currentStat.Damage, currentStat.Name, currentStat.AvatarSprite);
 					enemyCard.SetActive(true);
 				}
 				else

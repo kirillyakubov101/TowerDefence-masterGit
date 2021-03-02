@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8539379552078652943}
   - component: {fileID: 3798068253744507138}
+  - component: {fileID: 1488686515}
   m_Layer: 0
-  m_Name: Target
+  m_Name: Level Controller
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -44,7 +45,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 5
-  gold: 200
+  gold: 500
   goldPoints: {fileID: 0}
   lifePoints: {fileID: 0}
   numberOfEnemies: 0
+--- !u!114 &1488686515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539379552078652942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d2d02e772d4144090415bf9d79938a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursor: {fileID: 2800000, guid: 44a99ee545fd8ba46a452b12c1f9378b, type: 3}
+  enemyCard: {fileID: 850030265838371410, guid: cc70916649c8dc542b03db226860d952,
+    type: 3}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  card: {fileID: 2612355271097851165, guid: 0e841d261b8feb34d8cf406bc28ff45b, type: 3}

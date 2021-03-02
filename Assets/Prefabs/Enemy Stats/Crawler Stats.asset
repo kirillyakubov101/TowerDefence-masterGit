@@ -17,3 +17,4 @@ MonoBehaviour:
   health: 50
   magicResistance: 0
   pierceArmor: 0
+  avatarSprite: {fileID: 21300000, guid: 54ec10bea0b3a4346bf23bd62546d8a7, type: 3}
