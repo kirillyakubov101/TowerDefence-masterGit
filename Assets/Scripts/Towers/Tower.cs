@@ -5,39 +5,34 @@ namespace TowerDefence.Towers
 {
 	public class Tower : MonoBehaviour
 	{
-		[SerializeField] float baseSpawnLevel = -0.2f;
 		[SerializeField] float spawnSpeed = 2f;
 
-		public float BaseSpawnLevel { get => baseSpawnLevel; set => baseSpawnLevel = value; }
-
 		static public event Action OnTowerUp; //change this to spartial volume event
+
+		bool isTowerShowed = false;
+		float goalSpawnLevel;
 
 		private void Start()
 		{
 			OnTowerUp?.Invoke();
+			goalSpawnLevel = transform.position.y + EmpySlot.towerSpawnOffset;
 		}
-
-		bool isTowerShowed = false;
-
-		
 
 		private void Update()
 		{
-			if (isTowerShowed) { return; }
+			if (isTowerShowed) {Destroy(this); }
 			ShowTower();
 		}
 
 		private void ShowTower()
 		{
-			if (transform.position.y < baseSpawnLevel)
+			if (transform.position.y < goalSpawnLevel)
 			{
 				transform.Translate(Vector3.up * spawnSpeed * Time.deltaTime);
 			}
 			else
 			{
 				isTowerShowed = true;
-				
-		
 			}
 		}
 	}

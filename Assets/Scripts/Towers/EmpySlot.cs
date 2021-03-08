@@ -26,8 +26,8 @@ namespace TowerDefence.Towers
 		[Header("Smoke Particle Effect")]
 		[SerializeField] Transform smokePartcileTransform = null;
 		[SerializeField] ParticleSystem smokeParticleEffect = null;
-		[SerializeField] float baseSpawnLevelParam = 2f;
 
+		public static float towerSpawnOffset = 5f;
 		LevelController levelController;
 		
 
@@ -66,8 +66,7 @@ namespace TowerDefence.Towers
 			{
 				archerTowerPos.position = AdjustNewTowerPosition(archerTowerPos);
 				levelController.PayForTower(ArcherTowerPrice);
-				Tower newTower = Instantiate(archerTower, archerTowerPos.position, transform.rotation);
-				newTower.BaseSpawnLevel = baseSpawnLevelParam;
+				Instantiate(archerTower, archerTowerPos.position, transform.rotation);
 				SmokeTrail();
 				SelfDestroyPaltform();
 			}
@@ -124,9 +123,10 @@ namespace TowerDefence.Towers
 
 		}
 
+		//on spawn, move the tower const units down
 		private Vector3 AdjustNewTowerPosition(Transform towerPos)
 		{
-			towerPos.position = new Vector3(towerPos.position.x, towerPos.position.y - 5, towerPos.position.z);
+			towerPos.position = new Vector3(towerPos.position.x, towerPos.position.y - towerSpawnOffset, towerPos.position.z);
 			return towerPos.position;
 		}
 
