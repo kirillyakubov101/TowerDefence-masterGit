@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TowerDefence.Core
@@ -12,6 +13,9 @@ namespace TowerDefence.Core
 		[SerializeField] Text lifePoints = null;
 
 		bool isGameOver = false;
+
+		//event for savingSystem
+		public static event Action<int> onLevelPassed;
 
 		public static event Action WonGame;
 		public static event Action LostGame;
@@ -55,9 +59,19 @@ namespace TowerDefence.Core
 		{	
 			if(numberOfEnemies <= 0 && !isGameOver)
 			{
+				SaveProgress();
 				WonGame?.Invoke();
 				isGameOver = true;
 			}
+		}
+
+		private void SaveProgress()
+		{
+			//for saving system
+			string levelName = SceneManager.GetActiveScene().name;
+			levelName = levelName.Substring(levelName.Length - 1);
+			int levelNumber = Int32.Parse(levelName);
+			onLevelPassed?.Invoke(levelNumber + 1);
 		}
 
 		private void LoseLifePoint()
