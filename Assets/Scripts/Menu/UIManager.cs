@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,8 @@ public class UIManager : MonoBehaviour
 	[SerializeField] AudioClip startButtonClip = null;
 	[SerializeField] float startGameDelayTime = 1.5f;
 	AudioSource audioSource;
+
+	public static event Action onStartNewGame;
 
 	private void Awake()
 	{
@@ -53,6 +56,12 @@ public class UIManager : MonoBehaviour
 
 	}
 
+	//it removes any save files and starts a new game
+	public void LoadStartNewGame()
+	{
+		StartCoroutine(StartNewGame());
+	}
+
 	public void LoadNextLevel()
 	{
 		FindObjectOfType<Fader>().FadeInAction();
@@ -74,5 +83,16 @@ public class UIManager : MonoBehaviour
 			LoadMenuScene();
 		}
 	}
+
+	private IEnumerator StartNewGame()
+	{
+		onStartNewGame?.Invoke();
+
+		yield return null;
+
+		LoadNextLevel();
+	}
+
+
 
 }

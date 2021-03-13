@@ -16,13 +16,13 @@ public class LevelSelection : MonoBehaviour
 	private void Awake()
 	{
 		savingWrapper = FindObjectOfType<SavingWrapper>();
-		Levels = GetComponentsInChildren<Button>();
 	}
 
 	// Start is called before the first frame update
 	void Start()
 	{ 
         CheckCurrentUnlockedLevels();
+		print("new current " +savingWrapper.CurrentLevel);
     }
 
 	private void Update()
@@ -34,7 +34,9 @@ public class LevelSelection : MonoBehaviour
 
 	private void CheckCurrentUnlockedLevels()
     {
+
 		maxUnlockedLevel = savingWrapper.CurrentLevel;
+
 
 		for (int i =0; i < Levels.Length; i ++)
 		{

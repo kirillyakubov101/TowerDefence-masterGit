@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TowerDefence.Core;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SavingWrapper : MonoBehaviour
 {
@@ -29,18 +30,19 @@ public class SavingWrapper : MonoBehaviour
 	private void OnEnable()
 	{
 		LevelController.onLevelPassed += HandleSaveLevel;
+		UIManager.onStartNewGame += Delete;
 	}
 
 	private void OnDisable()
 	{
 		LevelController.onLevelPassed -= HandleSaveLevel;
+		UIManager.onStartNewGame -= Delete;
 	}
 
 	private void HandleSaveLevel(int level)
 	{
 		if(CurrentLevel >= level) { return; } //avoid overwrite save if the level is smaller than the current one
 		CurrentLevel = level;
-		print(level);
 		Save();
 	}
 
@@ -60,7 +62,6 @@ public class SavingWrapper : MonoBehaviour
 	public void Save()
 	{
 		data.currentUnlockedLevel = CurrentLevel;
-		print("saved " + CurrentLevel + "to data: " + data.currentUnlockedLevel);
 		SavingSystem.SavePlayer(data);
 	}
 
@@ -73,6 +74,7 @@ public class SavingWrapper : MonoBehaviour
 
 	public void Delete()
 	{
+		CurrentLevel = 1;
 		SavingSystem.DeleteFile(SavingSystem.path);
 	}
 }
