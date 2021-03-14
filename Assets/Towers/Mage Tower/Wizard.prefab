@@ -984,12 +984,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 20
-  bowPos: {fileID: 3064943024974194323}
-  arrow: {fileID: 7399530314509681084, guid: 9d944b2683b54a442a8d4fec2686789d, type: 3}
-  damage: 10
+  stuffPosition: {fileID: 0}
+  fireBall: {fileID: 0}
+  damage: 50
   mask:
     serializedVersion: 2
     m_Bits: 256
+  onFireBallCast:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2764967166985877985
 GameObject:
   m_ObjectHideFlags: 0

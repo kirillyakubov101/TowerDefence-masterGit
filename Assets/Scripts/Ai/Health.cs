@@ -8,11 +8,12 @@ namespace TowerDefence.AI
 	{
 		[SerializeField] StatsConfig statsConfig = null;
 
-		float health;
+		[SerializeField] float health;
 		float maxHealth;
 		Death death;
 
-		
+		//For mage
+		public bool HasShield { get; set; }
 
 		private void Awake()
 		{
@@ -28,6 +29,7 @@ namespace TowerDefence.AI
 		//from towers and projectiles
 		public void takeDamage(float damage)
 		{
+			if (HasShield) { return; }
 			health = Mathf.Max(health - damage,0);
 			
 			if(health == 0)

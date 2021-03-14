@@ -37,6 +37,7 @@ namespace TowerDefence.Friendly
 		private void AssignNewEnemy(Collider hit)
 		{
 			enemy = hit.gameObject.GetComponent<Fighter>();
+			if(enemy == null) { return; }
 			LookTowardsEnemy();
 			animator.SetBool("attack", true);
 		}
