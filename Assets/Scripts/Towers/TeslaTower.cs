@@ -28,6 +28,7 @@ namespace TowerDefence.Towers
 		void Update()
 		{
 			CastSphere();
+			CheckEmptyElementsInList(enemiesNearBy);
 			Shoot();
 		}
 
@@ -79,13 +80,13 @@ namespace TowerDefence.Towers
 			enemiesNearBy.Clear();
 		}
 
-		/*private void OnDrawGizmos()
+		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.yellow;
 			Gizmos.DrawWireSphere(transform.position, range);
-		}*/
+		}
 
-		void GenerateLightning()
+		private void GenerateLightning()
 		{
 			
 			laser.enabled = true;
@@ -101,6 +102,17 @@ namespace TowerDefence.Towers
 				enemiesNearBy[i].takeDamage(towerDamage);
 			}
 			arrayOfEnemiesPositions = null;
+		}
+
+		private void CheckEmptyElementsInList(List<Health> list)
+		{
+			for(int i = 0; i < list.Count; i++)
+			{
+				if(list[i] == null)
+				{
+					list.Remove(list[i]);
+				}
+			}
 		}
 		
 	}

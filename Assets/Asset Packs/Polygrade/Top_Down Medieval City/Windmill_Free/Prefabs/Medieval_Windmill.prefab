@@ -107,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 1335958607354298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.65845, y: 0.65845, z: 0.65845}
+  m_LocalScale: {x: 0.6112763, y: 0.6112763, z: 0.6112763}
   m_Children:
   - {fileID: 4522396619935862}
   - {fileID: 4278356127332818}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windTurbine: {fileID: 4278356127332818}
-  rotationSpeed: 10
+  rotationSpeed: 12
 --- !u!1 &1576808460891832
 GameObject:
   m_ObjectHideFlags: 0

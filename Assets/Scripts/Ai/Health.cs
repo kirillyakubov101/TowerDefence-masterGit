@@ -7,6 +7,7 @@ namespace TowerDefence.AI
 	public class Health : MonoBehaviour
 	{
 		[SerializeField] StatsConfig statsConfig = null;
+		[SerializeField] Canvas healthBar = null;
 
 		[SerializeField] float health;
 		float maxHealth;
@@ -30,6 +31,12 @@ namespace TowerDefence.AI
 		public void takeDamage(float damage)
 		{
 			if (HasShield) { return; }
+
+			//Calculate damage according to the stats for armor and resistance -> damage type
+
+			//enable healthBar
+			healthBar.enabled = true;
+
 			health = Mathf.Max(health - damage,0);
 			
 			if(health == 0)
@@ -66,6 +73,6 @@ namespace TowerDefence.AI
 			return maxHealth;
 		}
 
-		public StatsConfig StatsConfig { get => statsConfig;  }
+		//public StatsConfig StatsConfig { get => statsConfig;  }
 	}
 }

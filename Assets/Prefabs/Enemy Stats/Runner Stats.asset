@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Runner
   damage: 10
-  health: 175
+  health: 75
   magicResistance: 0
   pierceArmor: 0
   avatarSprite: {fileID: 21300000, guid: 4ec40fdcb557e764c952bbf8d00e47ec, type: 3}

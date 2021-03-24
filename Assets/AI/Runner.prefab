@@ -53,7 +53,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d574e5343ee7e4b9d37c5a126640e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 1
 --- !u!136 &222177925350376606
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -103,6 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsConfig: {fileID: 11400000, guid: 858a31018516b1047b188e097f7f2d85, type: 2}
+  healthBar: {fileID: 3223507838960923876}
+  health: 0
 --- !u!54 &4163449642117739274
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -473,6 +474,12 @@ PrefabInstance:
 --- !u!224 &6595103281641106507 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2456204812400113037, guid: c5916b307506c114cb96c066ae51f98a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8759697252136360390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &3223507838960923876 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6137422717122407714, guid: c5916b307506c114cb96c066ae51f98a,
     type: 3}
   m_PrefabInstance: {fileID: 8759697252136360390}
   m_PrefabAsset: {fileID: 0}

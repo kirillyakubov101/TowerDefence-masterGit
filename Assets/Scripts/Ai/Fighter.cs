@@ -17,7 +17,7 @@ namespace TowerDefence.AI
 		FriendlyFighter enemy = null;
 		Transform originalPath = null;
 
-		
+		public StatsConfig StatsConfig { get => statsConfig; }
 
 		private void Awake()
 		{

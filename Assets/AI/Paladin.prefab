@@ -472,7 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d574e5343ee7e4b9d37c5a126640e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 2
 --- !u!195 &8455002151180946811
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -538,6 +537,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsConfig: {fileID: 11400000, guid: d7222875c4916264285ad19cbb287785, type: 2}
+  healthBar: {fileID: 2798382678917539187}
+  health: 0
 --- !u!114 &7021549150448756637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2552,15 +2553,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5db8c155f5937334990d435902e4470f, type: 3}
---- !u!198 &5630304133224894968 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1359218376632169641, guid: 5db8c155f5937334990d435902e4470f,
-    type: 3}
-  m_PrefabInstance: {fileID: 6700848469547902289}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2997541299728675610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8459824708177401419, guid: 5db8c155f5937334990d435902e4470f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700848469547902289}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5630304133224894968 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1359218376632169641, guid: 5db8c155f5937334990d435902e4470f,
     type: 3}
   m_PrefabInstance: {fileID: 6700848469547902289}
   m_PrefabAsset: {fileID: 0}
@@ -2706,6 +2707,12 @@ PrefabInstance:
 --- !u!224 &5904054230417980892 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2456204812400113037, guid: c5916b307506c114cb96c066ae51f98a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8356810956008982609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &2798382678917539187 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6137422717122407714, guid: c5916b307506c114cb96c066ae51f98a,
     type: 3}
   m_PrefabInstance: {fileID: 8356810956008982609}
   m_PrefabAsset: {fileID: 0}

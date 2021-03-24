@@ -214,10 +214,9 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 256
-  enemy: {fileID: 0}
-  range: 20
+  range: 15
   enemiesNearBy: []
-  towerDamage: 0.08
+  towerDamage: 0.1
   shootingPoint: {fileID: 3324598902158741458}
 --- !u!114 &-2211551666176333658
 MonoBehaviour:
@@ -231,7 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944bed2cbe4828348961dfb3ee3c2888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpawnLevel: 4
   spawnSpeed: 5
 --- !u!82 &5412708929415848361
 AudioSource:
@@ -289,7 +287,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
